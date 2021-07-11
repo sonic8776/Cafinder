@@ -9,7 +9,7 @@ import UIKit
 import GoogleMaps
 import CoreLocation
 
-class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
     
     var currentCafe : Cafe!
     var mapView = GMSMapView()
@@ -46,7 +46,6 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         // 不要調整內容的區域，讓內容蓋住透明的導覽列
         tableView.contentInsetAdjustmentBehavior = .never
         
-        
     }
     
     func setMapView() {
@@ -55,6 +54,7 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 15.0)
         
         mapView = GMSMapView.map(withFrame: self.mapUIView.frame, camera: camera)
+        mapView.delegate = self
         
         // Configure a marker
         let marker = GMSMarker()
@@ -73,6 +73,29 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: tableView.topAnchor).isActive = true
 
+    }
+    
+    // Tap info window of marker to open Google Maps app or browser to see more information.
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        let lat = currentCafe.latitude
+        let long = currentCafe.longitude
+        if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
+            UIApplication.shared.open(URL(string:"comgooglemaps://?center=\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.open(URL(string: "http://maps.google.com/maps?q=loc:\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
+        }
+    }
+    
+    // Tap marker to open Google Maps app or browser to see more information.
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        let lat = currentCafe.latitude
+        let long = currentCafe.longitude
+        if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
+            UIApplication.shared.open(URL(string:"comgooglemaps://?center=\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.open(URL(string: "http://maps.google.com/maps?q=loc:\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
+        }
+        return true
     }
     
     // MARK: - UITableView Methods.
