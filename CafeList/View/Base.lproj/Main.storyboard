@@ -124,7 +124,7 @@
         <scene sceneID="gc6-9n-hJg">
             <objects>
                 <tableViewController id="JYk-K2-zGI" customClass="CafeListVC" customModule="CafeList" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="OmB-9j-UDg">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="OmB-9j-UDg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -168,10 +168,70 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="locationLabel" destination="IiK-ia-hau" id="MOA-AA-Iph"/>
+                                    <outlet property="addressLabel" destination="IiK-ia-hau" id="MOA-AA-Iph"/>
                                     <outlet property="nameLabel" destination="n0q-Ml-SMw" id="iQD-Ko-H4N"/>
                                     <outlet property="socketLabel" destination="vLs-g9-98d" id="0HK-0W-Ghf"/>
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="cafeDetail" id="IdG-o8-Ggk"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CafeListCell_V2" rowHeight="82" id="Pqk-oi-9rD" customClass="CafeListCell_V2" customModule="CafeList" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="106.5" width="375" height="82"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pqk-oi-9rD" id="8ve-Li-JGM">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCC-1x-ajm">
+                                            <rect key="frame" x="15" y="7.5" width="345" height="67"/>
+                                            <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                        </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="UhK-lS-LQx">
+                                            <rect key="frame" x="36" y="26" width="323" height="30"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dhf-KN-ysN">
+                                                    <rect key="frame" x="0.0" y="0.0" width="323" height="3"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5H-PU-0b1">
+                                                    <rect key="frame" x="0.0" y="9" width="323" height="3"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Socket" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLu-Gq-l60">
+                                                    <rect key="frame" x="0.0" y="18" width="323" height="3"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <color key="textColor" red="0.25098039220000001" green="0.14117647059999999" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="limit_timeLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhC-yu-o1p">
+                                                    <rect key="frame" x="0.0" y="27" width="323" height="3"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <color key="textColor" red="0.25098039220000001" green="0.14117647059999999" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="RCC-1x-ajm" secondAttribute="bottom" constant="7.5" id="2Ct-oV-MLd"/>
+                                        <constraint firstItem="UhK-lS-LQx" firstAttribute="leading" secondItem="8ve-Li-JGM" secondAttribute="leadingMargin" constant="20" id="HIK-MC-mIu"/>
+                                        <constraint firstAttribute="trailing" secondItem="RCC-1x-ajm" secondAttribute="trailing" constant="15" id="JWK-26-ruS"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="UhK-lS-LQx" secondAttribute="bottom" constant="15" id="LUa-CA-lv1"/>
+                                        <constraint firstItem="RCC-1x-ajm" firstAttribute="top" secondItem="8ve-Li-JGM" secondAttribute="top" constant="7.5" id="agD-rV-agX"/>
+                                        <constraint firstItem="RCC-1x-ajm" firstAttribute="leading" secondItem="8ve-Li-JGM" secondAttribute="leading" constant="15" id="eoa-Rh-6va"/>
+                                        <constraint firstItem="UhK-lS-LQx" firstAttribute="top" secondItem="8ve-Li-JGM" secondAttribute="topMargin" constant="15" id="mZm-Pi-oqS"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="UhK-lS-LQx" secondAttribute="trailing" id="xxg-4d-OqK"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="backgroundCardView" destination="RCC-1x-ajm" id="cQg-4s-qhg"/>
+                                    <outlet property="limit_timeLabel" destination="xhC-yu-o1p" id="iij-kR-uJ5"/>
+                                    <outlet property="locationLabel" destination="g5H-PU-0b1" id="4Z3-ZY-gdf"/>
+                                    <outlet property="nameLabel" destination="Dhf-KN-ysN" id="dyt-RS-8mR"/>
+                                    <outlet property="socketLabel" destination="CLu-Gq-l60" id="vNa-Kr-uIi"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -186,7 +246,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Wp-eP-out" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="550" y="860"/>
+            <point key="canvasLocation" x="549.60000000000002" y="859.52023988005999"/>
         </scene>
         <!--Google MapVC-->
         <scene sceneID="PN0-7p-Nbc">
@@ -281,6 +341,9 @@
         <image name="map" catalog="system" width="128" height="110"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

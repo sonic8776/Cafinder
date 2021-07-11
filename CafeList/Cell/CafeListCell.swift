@@ -10,7 +10,7 @@ import UIKit
 class CafeListCell: UITableViewCell {
 
     @IBOutlet var nameLabel : UILabel!
-    @IBOutlet var locationLabel : UILabel!
+    @IBOutlet var addressLabel : UILabel!
     @IBOutlet var socketLabel : UILabel!
     
     override func awakeFromNib() {
@@ -18,7 +18,7 @@ class CafeListCell: UITableViewCell {
         // Initialization code
 //        self.backgroundColor = Colors.shared.primaryLightColor
         nameLabel.textColor = Colors.shared.primaryColor
-        locationLabel.textColor = Colors.shared.secondaryTextColor
+        addressLabel.textColor = Colors.shared.secondaryTextColor
         socketLabel.textColor = Colors.shared.primaryLightColor
     }
 

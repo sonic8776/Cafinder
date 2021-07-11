@@ -19,6 +19,7 @@ class Cafe: Codable {
     var weburl: String
     var latitude: String
     var longitude: String
+    var limited_time: String
     var socket : String
     var standing_desk : String // 可能為空字串
     var mrt : String // 可能為空字串
@@ -36,6 +37,7 @@ class Cafe: Codable {
               let cafeweburl = json["url"] as? String,
               let cafeLatitude = json["latitude"] as? String,
               let cafeLongitude = json["longitude"] as? String,
+              let cafeLimited_time = json["limited_time"] as? String,
               let cafeSocket = json["socket"] as? String,
               let cafeStanding_desk = json["standing_desk"] as? String,
               let cafeMrt = json["mrt"] as? String,
@@ -54,6 +56,7 @@ class Cafe: Codable {
         self.weburl = cafeweburl
         self.latitude = cafeLatitude
         self.longitude = cafeLongitude
+        self.limited_time = cafeLimited_time
         self.socket = cafeSocket
         self.standing_desk = cafeStanding_desk
         self.mrt = cafeMrt
