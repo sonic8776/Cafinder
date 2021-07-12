@@ -21,6 +21,7 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
         super.viewWillAppear(animated)
         
         navigationController?.hidesBarsOnSwipe = true
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     override func viewDidLoad() {
@@ -30,21 +31,30 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
         tableView.reloadData()
         locationManager.requestWhenInUseAuthorization() // 詢問時機待優化
         
+        // Set searchController
         self.navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "輸入地區 / 捷運站名搜尋咖啡廳..."
+        searchController.searchBar.barTintColor = .white
+        searchController.searchBar.backgroundImage = UIImage()
+        searchController.searchBar.tintColor = myColor.primaryColor
         
         tableView.cellLayoutMarginsFollowReadableWidth = true
         
         // Set to use the large title of the navigation bar
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        // Configure the navigation bar
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+        // Configure navigation bar
+        // Change title color when user swipes down and title becomes small
+        let textAttributes = [NSAttributedString.Key.foregroundColor: myColor.primaryColor]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
+        //navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.hidesBarsOnSwipe = true
         
-        // Use Cutom Font
+        // Use Custom Font
         if let customFont = UIFont(name: "RubikRoman-Medium", size: 40.0) {
             navigationController?.navigationBar.largeTitleTextAttributes = [
                 NSAttributedString.Key.foregroundColor:

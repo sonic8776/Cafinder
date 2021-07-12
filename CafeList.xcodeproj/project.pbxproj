@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		DE300076269B407B005772F0 /* paddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE300075269B407B005772F0 /* paddingLabel.swift */; };
+		DE300088269C4139005772F0 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE300087269C4139005772F0 /* AboutVC.swift */; };
+		DE30008C269C4299005772F0 /* CafeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE30008B269C4299005772F0 /* CafeTabBarController.swift */; };
 		DE68B9EF269B33C6007A9ACA /* CafeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE68B9EE269B33C6007A9ACA /* CafeListCell.swift */; };
 		DE75065D267B418B001345F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE75065C267B418B001345F2 /* AppDelegate.swift */; };
 		DE75065F267B418B001345F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE75065E267B418B001345F2 /* SceneDelegate.swift */; };
@@ -47,6 +49,8 @@
 		43FA61324987D2E5CA6D6D56 /* Pods-CafeList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CafeList.debug.xcconfig"; path = "Target Support Files/Pods-CafeList/Pods-CafeList.debug.xcconfig"; sourceTree = "<group>"; };
 		47788F24B60511754248565A /* Pods_CafeList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CafeList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE300075269B407B005772F0 /* paddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paddingLabel.swift; sourceTree = "<group>"; };
+		DE300087269C4139005772F0 /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
+		DE30008B269C4299005772F0 /* CafeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeTabBarController.swift; sourceTree = "<group>"; };
 		DE68B9EE269B33C6007A9ACA /* CafeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeListCell.swift; sourceTree = "<group>"; };
 		DE750659267B418B001345F2 /* CafeList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CafeList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE75065C267B418B001345F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 				DE750676267B471B001345F2 /* CafeListVC.swift */,
 				DE750660267B418B001345F2 /* CafeDetailVC.swift */,
 				DE9CD5572686D5E000F9B4F6 /* GoogleMapVC.swift */,
+				DE300087269C4139005772F0 /* AboutVC.swift */,
+				DE30008B269C4299005772F0 /* CafeTabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -353,12 +359,14 @@
 				DE750661267B418B001345F2 /* CafeDetailVC.swift in Sources */,
 				DE9CD5582686D5E000F9B4F6 /* GoogleMapVC.swift in Sources */,
 				DE75065D267B418B001345F2 /* AppDelegate.swift in Sources */,
+				DE300088269C4139005772F0 /* AboutVC.swift in Sources */,
 				DE68B9EF269B33C6007A9ACA /* CafeListCell.swift in Sources */,
 				DE300076269B407B005772F0 /* paddingLabel.swift in Sources */,
 				DE75067C267C4B63001345F2 /* CafeDetailIconTextCell.swift in Sources */,
 				DE75065F267B418B001345F2 /* SceneDelegate.swift in Sources */,
 				DECB0D9D267C941500833614 /* MyColors.swift in Sources */,
 				DEFFE67F2687751D00E654A5 /* CafeManager.swift in Sources */,
+				DE30008C269C4299005772F0 /* CafeTabBarController.swift in Sources */,
 				DE750677267B471B001345F2 /* CafeListVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

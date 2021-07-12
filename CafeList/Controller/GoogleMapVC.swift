@@ -14,6 +14,7 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
     @IBOutlet weak var mapUIView: UIView!
     
     let manager = CLLocationManager()
+    let myColor = Colors.shared
     var mapView = GMSMapView()
     
     var cafeManager = CafeManager()
@@ -24,6 +25,9 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         
         manager.requestWhenInUseAuthorization()
         manager.requestAlwaysAuthorization()
+        
+        let textAttributes = [NSAttributedString.Key.foregroundColor: myColor.primaryColor]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
         
         mapView.delegate = self
         
