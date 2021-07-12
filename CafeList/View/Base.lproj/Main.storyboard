@@ -160,9 +160,18 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Disclosure Only" translatesAutoresizingMaskIntoConstraints="NO" id="aSz-G4-Hy3">
+                                                    <rect key="frame" x="318" y="20" width="7" height="12"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="12" id="ViQ-vv-dCx"/>
+                                                        <constraint firstAttribute="width" constant="7" id="wu9-s4-lsE"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="aSz-G4-Hy3" secondAttribute="trailing" constant="20" id="Blw-Ve-FAN"/>
+                                                <constraint firstItem="aSz-G4-Hy3" firstAttribute="top" secondItem="RCC-1x-ajm" secondAttribute="top" constant="20" id="dzV-Rz-crG"/>
                                                 <constraint firstAttribute="trailing" secondItem="b5D-FB-LzF" secondAttribute="trailing" constant="15" id="rdp-x3-ROP"/>
                                                 <constraint firstAttribute="bottom" secondItem="b5D-FB-LzF" secondAttribute="bottom" constant="16" id="xZr-2E-59A"/>
                                             </constraints>
@@ -325,13 +334,11 @@
         </designable>
     </designables>
     <resources>
+        <image name="Disclosure Only" width="21" height="36"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

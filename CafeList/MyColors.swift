@@ -14,8 +14,30 @@ struct Colors {
     let secondaryTextColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.0);
     
     // For mrtLabel
-    let mrtRed = UIColor.red
-    let mrtOrange = UIColor.orange
-    
-    
+    let mrtRed = UIColor(hexString: "#D73E3E")
+    let mrtOrange = UIColor(hexString: "#FFA41C")
+    let mrtGreen = UIColor(hexString: "#478830")
+    let mrtBlue = UIColor(hexString: "#3B8EF0")
+    let mrtBrown = UIColor(hexString: "#AD7643")
+    let mrtYellow = UIColor(hexString: "#FAE319")
+}
+
+extension UIColor {
+    convenience init(hexString: String) {
+        let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int = UInt64()
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (255, 0, 0, 0)
+        }
+        self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
+    }
 }
