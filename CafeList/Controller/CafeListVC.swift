@@ -8,28 +8,31 @@
 import UIKit
 import CoreLocation
 
-class CafeListVC: UITableViewController {
+class CafeListVC: UITableViewController, UISearchResultsUpdating {
     
-    //var cafeList = [Cafe]()
     let cafeManager = CafeManager.shared
     let locationManager = CLLocationManager()
     let myColor = Colors.shared
+    
+    var searchController = UISearchController(searchResultsController: nil)
+    var searchResults: [Cafe] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.hidesBarsOnSwipe = true
-        //        tableView.backgroundColor = Colors.shared.primaryLightColor
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getCafeList()
-        //cafeManager.getCafeList()
         tableView.reloadData()
         locationManager.requestWhenInUseAuthorization() // 詢問時機待優化
         
+        self.navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
         
         tableView.cellLayoutMarginsFollowReadableWidth = true
         
@@ -78,6 +81,30 @@ class CafeListVC: UITableViewController {
         locationManager.requestWhenInUseAuthorization() // 詢問時機待優化
     }
     
+    // MARK: - UISearchController methods
+    
+    func filterContent(for searchText: String) {
+        if searchController.isActive {
+            searchResults = CafeManager.cafeList.filter { (cafe) -> Bool in
+                let name = cafe.name
+                let address = cafe.address
+                let mrt = cafe.mrt
+                let isMatch = name.localizedCaseInsensitiveContains(searchText) || address.localizedCaseInsensitiveContains(searchText) || mrt.localizedCaseInsensitiveContains(searchText)
+                return isMatch
+                
+            }
+        } else {
+            searchResults = []
+        }
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            filterContent(for: searchText)
+            tableView.reloadData()
+        }
+    }
+    
     
     // MARK: - Table view data source
     
@@ -87,18 +114,33 @@ class CafeListVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return CafeManager.cafeList.count
+        if searchController.isActive {
+            return searchResults.count
+        } else {
+            return CafeManager.cafeList.count
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if searchController.isActive {
+            return false
+        } else {
+            return true
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CafeListCell.self), for: indexPath) as! CafeListCell
         
-        cell.nameLabel.text = CafeManager.cafeList[indexPath.row].name
-        cell.locationLabel.text = CafeManager.cafeList[indexPath.row].address
+        // 判斷是從搜尋結果或原本陣列取得咖啡廳
+        let cafe = (searchController.isActive) ? searchResults[indexPath.row] : CafeManager.cafeList[indexPath.row]
+        
+        // Configure cell
+        cell.nameLabel.text = cafe.name
+        cell.locationLabel.text = cafe.address
         
         // Configure socketLabel
-        switch CafeManager.cafeList[indexPath.row].socket {
+        switch cafe.socket {
         
         case "yes":
             cell.socketLabel.text = "# 有很多插座"
@@ -114,7 +156,7 @@ class CafeListVC: UITableViewController {
         }
         
         // Configure limit_timeLabel
-        switch CafeManager.cafeList[indexPath.row].limited_time {
+        switch cafe.limited_time {
         
         case "yes":
             cell.limit_timeLabel.text = "# 一律有限時"
@@ -133,7 +175,7 @@ class CafeListVC: UITableViewController {
         cell.mrtLabel.clipsToBounds = true
         cell.mrtLabel.layer.cornerRadius = 5
         
-        let label = CafeManager.cafeList[indexPath.row].mrt
+        let label = cafe.mrt
         
         // MARK: - Kaohsiung - Red line
         if label.contains("小港") {
@@ -736,9 +778,9 @@ class CafeListVC: UITableViewController {
         }
         // MARK: - Taipei - Yellow line
         else if label.contains("十四張") {
-           cell.mrtLabel.text = "十四張"
-           cell.mrtLabel.textColor = .black
-           cell.mrtLabel.backgroundColor = myColor.mrtYellow
+            cell.mrtLabel.text = "十四張"
+            cell.mrtLabel.textColor = .black
+            cell.mrtLabel.backgroundColor = myColor.mrtYellow
         } else if label.contains("秀朗橋") {
             cell.mrtLabel.text = "秀朗橋"
             cell.mrtLabel.textColor = .black
@@ -792,7 +834,7 @@ class CafeListVC: UITableViewController {
         
         if let cafeDetailVC = segue.destination as? CafeDetailVC,
            let row = tableView.indexPathForSelectedRow?.row {
-            cafeDetailVC.currentCafe = CafeManager.cafeList[row]
+            cafeDetailVC.currentCafe = (searchController.isActive) ? searchResults[row] :  CafeManager.cafeList[row]
         }
     }
 }
