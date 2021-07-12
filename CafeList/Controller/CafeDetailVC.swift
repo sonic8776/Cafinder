@@ -9,7 +9,7 @@ import UIKit
 import GoogleMaps
 import CoreLocation
 
-class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource, GMSMapViewDelegate {
+class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var currentCafe : Cafe!
     var mapView = GMSMapView()
@@ -75,29 +75,6 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
     }
     
-    // Tap info window of marker to open Google Maps app or browser to see more information.
-    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        let lat = currentCafe.latitude
-        let long = currentCafe.longitude
-        if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
-            UIApplication.shared.open(URL(string:"comgooglemaps://?center=\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
-        } else {
-            UIApplication.shared.open(URL(string: "http://maps.google.com/maps?q=loc:\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
-        }
-    }
-    
-    // Tap marker to open Google Maps app or browser to see more information.
-    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        let lat = currentCafe.latitude
-        let long = currentCafe.longitude
-        if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
-            UIApplication.shared.open(URL(string:"comgooglemaps://?center=\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
-        } else {
-            UIApplication.shared.open(URL(string: "http://maps.google.com/maps?q=loc:\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
-        }
-        return true
-    }
-    
     // MARK: - UITableView Methods.
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -150,4 +127,30 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
+}
+
+extension CafeDetailVC: GMSMapViewDelegate {
+    
+    // Tap info window of marker to open Google Maps app or browser to see more information.
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        let lat = currentCafe.latitude
+        let long = currentCafe.longitude
+        if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
+            UIApplication.shared.open(URL(string:"comgooglemaps://?center=\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.open(URL(string: "http://maps.google.com/maps?q=loc:\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
+        }
+    }
+    
+    // Tap marker to open Google Maps app or browser to see more information.
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        let lat = currentCafe.latitude
+        let long = currentCafe.longitude
+        if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
+            UIApplication.shared.open(URL(string:"comgooglemaps://?center=\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.open(URL(string: "http://maps.google.com/maps?q=loc:\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
+        }
+        return true
+    }
 }

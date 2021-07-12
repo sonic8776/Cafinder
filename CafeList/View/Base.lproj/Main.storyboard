@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZMU-uo-Zqh">
-                                <rect key="frame" x="0.0" y="371" width="375" height="247"/>
+                                <rect key="frame" x="0.0" y="275" width="375" height="392"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CafeDetailIconTextCell" id="Dyq-JM-iA3" customClass="CafeDetailIconTextCell" customModule="CafeList" customModuleProvider="target">
@@ -91,7 +91,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dY7-Th-Nvq">
-                                <rect key="frame" x="16" y="96" width="343" height="250"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="250"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="dWW-F6-mMA"/>
@@ -129,85 +129,67 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CafeListCell" rowHeight="82" id="qvx-PR-LNC" customClass="CafeListCell" customModule="CafeList" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24.5" width="375" height="82"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qvx-PR-LNC" id="ee8-0t-Ke5">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="q9T-Xl-8p3">
-                                            <rect key="frame" x="22" y="11" width="337" height="60"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0q-Ml-SMw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="337" height="19.5"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiK-ia-hau">
-                                                    <rect key="frame" x="0.0" y="20.5" width="337" height="19"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Socket" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLs-g9-98d">
-                                                    <rect key="frame" x="0.0" y="40.5" width="337" height="19.5"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <color key="textColor" red="0.25098039215686274" green="0.14117647058823529" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </stackView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="q9T-Xl-8p3" secondAttribute="trailing" id="8JH-Qa-EM7"/>
-                                        <constraint firstItem="q9T-Xl-8p3" firstAttribute="top" secondItem="ee8-0t-Ke5" secondAttribute="topMargin" id="O1W-we-hqK"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="q9T-Xl-8p3" secondAttribute="bottom" id="TLC-wA-oqW"/>
-                                        <constraint firstItem="q9T-Xl-8p3" firstAttribute="leading" secondItem="ee8-0t-Ke5" secondAttribute="leadingMargin" constant="6" id="zJe-T7-z3O"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="addressLabel" destination="IiK-ia-hau" id="MOA-AA-Iph"/>
-                                    <outlet property="nameLabel" destination="n0q-Ml-SMw" id="iQD-Ko-H4N"/>
-                                    <outlet property="socketLabel" destination="vLs-g9-98d" id="0HK-0W-Ghf"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="cafeDetail" id="IdG-o8-Ggk"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CafeListCell_V2" rowHeight="82" id="Pqk-oi-9rD" customClass="CafeListCell_V2" customModule="CafeList" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="106.5" width="375" height="82"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CafeListCell" rowHeight="133" id="Pqk-oi-9rD" customClass="CafeListCell" customModule="CafeList" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="24.5" width="375" height="133"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pqk-oi-9rD" id="8ve-Li-JGM">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="133"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCC-1x-ajm">
-                                            <rect key="frame" x="15" y="7.5" width="345" height="67"/>
+                                            <rect key="frame" x="15" y="7.5" width="345" height="118"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MRTLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5D-FB-LzF" customClass="PaddingLabel" customModule="CafeList" customModuleProvider="target">
+                                                    <rect key="frame" x="261" y="81.5" width="69" height="20.5"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="paddingLeft">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="paddingRight">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="paddingTop">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="paddingBottom">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                            </subviews>
                                             <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="b5D-FB-LzF" secondAttribute="trailing" constant="15" id="rdp-x3-ROP"/>
+                                                <constraint firstAttribute="bottom" secondItem="b5D-FB-LzF" secondAttribute="bottom" constant="16" id="xZr-2E-59A"/>
+                                            </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="UhK-lS-LQx">
-                                            <rect key="frame" x="36" y="26" width="323" height="30"/>
+                                            <rect key="frame" x="36" y="26" width="293" height="81"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dhf-KN-ysN">
-                                                    <rect key="frame" x="0.0" y="0.0" width="323" height="3"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="293" height="16"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5H-PU-0b1">
-                                                    <rect key="frame" x="0.0" y="9" width="323" height="3"/>
+                                                    <rect key="frame" x="0.0" y="22" width="293" height="15.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Socket" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLu-Gq-l60">
-                                                    <rect key="frame" x="0.0" y="18" width="323" height="3"/>
+                                                    <rect key="frame" x="0.0" y="43.5" width="293" height="16"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="textColor" red="0.25098039220000001" green="0.14117647059999999" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="limit_timeLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhC-yu-o1p">
-                                                    <rect key="frame" x="0.0" y="27" width="323" height="3"/>
+                                                    <rect key="frame" x="0.0" y="65.5" width="293" height="15.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="textColor" red="0.25098039220000001" green="0.14117647059999999" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -223,13 +205,14 @@
                                         <constraint firstItem="RCC-1x-ajm" firstAttribute="top" secondItem="8ve-Li-JGM" secondAttribute="top" constant="7.5" id="agD-rV-agX"/>
                                         <constraint firstItem="RCC-1x-ajm" firstAttribute="leading" secondItem="8ve-Li-JGM" secondAttribute="leading" constant="15" id="eoa-Rh-6va"/>
                                         <constraint firstItem="UhK-lS-LQx" firstAttribute="top" secondItem="8ve-Li-JGM" secondAttribute="topMargin" constant="15" id="mZm-Pi-oqS"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="UhK-lS-LQx" secondAttribute="trailing" id="xxg-4d-OqK"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="UhK-lS-LQx" secondAttribute="trailing" constant="30" id="xxg-4d-OqK"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="backgroundCardView" destination="RCC-1x-ajm" id="cQg-4s-qhg"/>
                                     <outlet property="limit_timeLabel" destination="xhC-yu-o1p" id="iij-kR-uJ5"/>
                                     <outlet property="locationLabel" destination="g5H-PU-0b1" id="4Z3-ZY-gdf"/>
+                                    <outlet property="mrtLabel" destination="b5D-FB-LzF" id="XXg-Qk-jLi"/>
                                     <outlet property="nameLabel" destination="Dhf-KN-ysN" id="dyt-RS-8mR"/>
                                     <outlet property="socketLabel" destination="CLu-Gq-l60" id="vNa-Kr-uIi"/>
                                 </connections>
@@ -336,6 +319,11 @@
             <point key="canvasLocation" x="1740" y="124"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="b5D-FB-LzF">
+            <size key="intrinsicContentSize" width="69" height="20.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="list.dash" catalog="system" width="128" height="85"/>
         <image name="map" catalog="system" width="128" height="110"/>

@@ -1,6 +1,6 @@
 import UIKit
 
-class Colors {
+struct Colors {
     
     static let shared = Colors()
     
@@ -12,5 +12,10 @@ class Colors {
     let secondaryLightColor = UIColor(red: 1.00, green: 1.00, blue: 0.45, alpha: 1.0);
     let secondaryDarkColor = UIColor(red: 0.78, green: 0.65, blue: 0.00, alpha: 1.0);
     let secondaryTextColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.0);
+    
+    // For mrtLabel
+    let mrtRed = UIColor.red
+    let mrtOrange = UIColor.orange
+    
     
 }
