@@ -60,28 +60,89 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CafeDetailTextCell" id="Hqd-qw-YuC" customClass="CafeDetailTextCell" customModule="CafeList" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="69" width="375" height="44.5"/>
+                                        <rect key="frame" x="0.0" y="69" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hqd-qw-YuC" id="ePv-9f-Z7O">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGm-Jc-KXf">
-                                                    <rect key="frame" x="19" y="11" width="337" height="18.5"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <rect key="frame" x="20" y="13" width="38.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsh-so-f5W">
+                                                    <rect key="frame" x="317.5" y="13" width="37.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="MGm-Jc-KXf" firstAttribute="leading" secondItem="ePv-9f-Z7O" secondAttribute="leadingMargin" constant="3" id="79z-va-6yC"/>
-                                                <constraint firstItem="MGm-Jc-KXf" firstAttribute="top" secondItem="ePv-9f-Z7O" secondAttribute="topMargin" id="egv-3X-tIe"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="MGm-Jc-KXf" secondAttribute="bottom" constant="4" id="jJH-8V-uGJ"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="MGm-Jc-KXf" secondAttribute="trailing" constant="3" id="lSo-yh-7vs"/>
+                                                <constraint firstAttribute="trailing" secondItem="xsh-so-f5W" secondAttribute="trailing" constant="20" id="0el-0q-gxN"/>
+                                                <constraint firstItem="MGm-Jc-KXf" firstAttribute="leading" secondItem="ePv-9f-Z7O" secondAttribute="leading" constant="20" id="79z-va-6yC"/>
+                                                <constraint firstItem="xsh-so-f5W" firstAttribute="centerY" secondItem="ePv-9f-Z7O" secondAttribute="centerY" id="JjS-PM-bvX"/>
+                                                <constraint firstItem="MGm-Jc-KXf" firstAttribute="centerY" secondItem="ePv-9f-Z7O" secondAttribute="centerY" id="iLw-4S-uH1"/>
+                                                <constraint firstItem="xsh-so-f5W" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MGm-Jc-KXf" secondAttribute="trailing" constant="25" id="qed-ST-85y"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="MGm-Jc-KXf" id="EHh-Ao-6e8"/>
+                                            <outlet property="rightLabel" destination="xsh-so-f5W" id="e8l-Bf-8OR"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CafeDetailRatingCell" id="uCY-Yh-SSr" customClass="CafeDetailRatingCell" customModule="CafeList" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="112.5" width="375" height="44.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uCY-Yh-SSr" id="hAf-47-UKI">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geA-it-Law">
+                                                    <rect key="frame" x="20" y="11" width="336" height="18.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8nF-pg-Cqn" customClass="CosmosView" customModule="Cosmos">
+                                                    <rect key="frame" x="221" y="11" width="134" height="23"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="134" id="Mqb-gI-fal"/>
+                                                        <constraint firstAttribute="height" constant="23" id="Zit-54-ZxH"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                            <real key="value" value="23"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="Star"/>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="Star_Empty"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="geA-it-Law" firstAttribute="top" secondItem="hAf-47-UKI" secondAttribute="topMargin" id="0Ik-m3-BKS"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="geA-it-Law" secondAttribute="bottom" constant="4" id="3pp-38-Sv0"/>
+                                                <constraint firstAttribute="trailing" secondItem="8nF-pg-Cqn" secondAttribute="trailing" constant="20" id="60Z-tW-SbI"/>
+                                                <constraint firstItem="8nF-pg-Cqn" firstAttribute="centerY" secondItem="hAf-47-UKI" secondAttribute="centerY" id="M9b-4D-rSm"/>
+                                                <constraint firstItem="geA-it-Law" firstAttribute="leading" secondItem="hAf-47-UKI" secondAttribute="leading" constant="20" id="Ugc-CX-c5k"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="geA-it-Law" secondAttribute="trailing" constant="3" id="Z3T-XY-edd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="geA-it-Law" id="U2Z-0e-bSu"/>
+                                            <outlet property="ratingStars" destination="8nF-pg-Cqn" id="ZIP-a3-tiP"/>
+                                            <outlet property="textLabel" destination="geA-it-Law" id="nIc-AO-clh"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -118,7 +179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="550" y="1585"/>
+            <point key="canvasLocation" x="549.60000000000002" y="1584.5577211394304"/>
         </scene>
         <!--Cafe List-->
         <scene sceneID="gc6-9n-hJg">
@@ -139,9 +200,12 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCC-1x-ajm">
                                             <rect key="frame" x="15" y="7.5" width="345" height="118"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MRTLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5D-FB-LzF" customClass="PaddingLabel" customModule="CafeList" customModuleProvider="target">
-                                                    <rect key="frame" x="261" y="81.5" width="69" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MRTLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5D-FB-LzF" customClass="PaddingLabel" customModule="CafeList" customModuleProvider="target">
+                                                    <rect key="frame" x="257" y="81.5" width="73" height="20.5"/>
                                                     <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="73" id="ZLr-ld-qTd"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -372,6 +436,8 @@
     </designables>
     <resources>
         <image name="Disclosure Only" width="21" height="36"/>
+        <image name="Star" width="48" height="46"/>
+        <image name="Star_Empty" width="48" height="46"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
         <image name="map" catalog="system" width="128" height="110"/>

@@ -20,6 +20,9 @@ struct Colors {
     let mrtBlue = UIColor(hexString: "#3B8EF0")
     let mrtBrown = UIColor(hexString: "#AD7643")
     let mrtYellow = UIColor(hexString: "#FAE319")
+    
+    // For Rating Star
+    let emptyStar = UIColor(hexString: "#DADADA")
 }
 
 extension UIColor {

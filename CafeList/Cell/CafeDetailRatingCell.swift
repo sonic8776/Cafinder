@@ -1,21 +1,17 @@
 //
-//  CafeDetailTextCell.swift
+//  CafeDetailRatingCell.swift
 //  CafeList
 //
-//  Created by Judy Tsai on 2021/6/18.
+//  Created by Judy Tsai on 2021/7/14.
 //
 
 import UIKit
+import Cosmos
 
-class CafeDetailTextCell: UITableViewCell {
+class CafeDetailRatingCell: UITableViewCell {
 
-    @IBOutlet var descriptionLabel : UILabel! {
-        didSet {
-            descriptionLabel.numberOfLines = 0
-        }
-    }
-    
-    @IBOutlet weak var rightLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var ratingStars: CosmosView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

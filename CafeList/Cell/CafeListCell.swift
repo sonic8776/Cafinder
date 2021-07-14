@@ -18,7 +18,8 @@ class CafeListCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        // Set colors
         nameLabel.textColor = Colors.shared.primaryColor
         locationLabel.textColor = Colors.shared.secondaryTextColor
         socketLabel.textColor = Colors.shared.primaryLightColor
@@ -27,6 +28,7 @@ class CafeListCell: UITableViewCell {
         backgroundCardView.backgroundColor = .white
         contentView.backgroundColor = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
         
+        // Set card view layer
         backgroundCardView.layer.cornerRadius = 10.0
         backgroundCardView.layer.masksToBounds = false
         

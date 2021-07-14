@@ -67,7 +67,7 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
     
     func getCafeList(){
         
-        let urlStr = "https://cafenomad.tw/api/v1.2/cafes/taipei".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let urlStr = "https://cafenomad.tw/api/v1.2/cafes".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let url = URL(string: urlStr!)
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
             
