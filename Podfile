@@ -8,5 +8,6 @@ target 'CafeList' do
   # Pods for CafeList
   pod 'GoogleMaps', '5.1.0.0'
   pod 'Cosmos'
+  pod 'Google-Maps-iOS-Utils'
 
 end

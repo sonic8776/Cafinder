@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleMaps
+import GoogleMapsUtils
 import CoreLocation
 
 class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
@@ -15,7 +16,8 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
     
     let manager = CLLocationManager()
     let myColor = Colors.shared
-    var mapView = GMSMapView()
+    private var mapView = GMSMapView()
+    private var clusterManager: GMUClusterManager!
     
     var cafeManager = CafeManager()
     //var cafeList = [Cafe]()
@@ -31,8 +33,16 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         
         mapView.delegate = self
         
-        //fetchJsonData()
-        //test()
+        // Set up the cluster manager with the supplied icon generator and renderer.
+        let iconGenerator = GMUDefaultClusterIconGenerator()
+        let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
+        let renderer = GMUDefaultClusterRenderer(mapView: mapView,
+                                    clusterIconGenerator: iconGenerator)
+        clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
+
+        // Register self to listen to GMSMapViewDelegate events.
+        clusterManager.setMapDelegate(self)
+        
         showCafesOnMap()
         
         if !CLLocationManager.locationServicesEnabled() {
@@ -48,7 +58,7 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
             mapView.settings.myLocationButton = true
             mapView.isMyLocationEnabled = true
         }
- 
+        
         // print("License: \n\n\(GMSServices.openSourceLicenseInfo())")
     }
     
@@ -57,7 +67,7 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         alert.addAction(UIAlertAction(title: "好喔", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-    /*
+    /* Get JSON data
     func test() {
         if let url = URL(string: "https://cafenomad.tw/api/v1.2/cafes/kaohsiung") {
             let request = URLRequest(url: url)
@@ -135,23 +145,39 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
                 marker.title = data.name
                 marker.icon = GMSMarker.markerImage(with: .brown)
                 marker.map = mapView
+                clusterManager.add(marker)
             }
-            
         }
+        //clusterManager.cluster()
         self.mapUIView.addSubview(mapView)
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+      // center the map on tapped marker
+      mapView.animate(toLocation: marker.position)
+      // check if a cluster icon was tapped
+      if marker.userData is GMUCluster {
+        // zoom in on tapped cluster
+        mapView.animate(toZoom: mapView.camera.zoom + 1)
+        NSLog("Did tap cluster")
+        return true
+      }
+
+      NSLog("Did tap a normal marker")
+      return false
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Show the user's current location with blue pot.
         guard let location = locations.first else { return }
         
-        let testLat = 22.631435
-        let testLon = 120.301950
-        let testCoor = CLLocationCoordinate2D(latitude: testLat, longitude: testLon)
+//        let testLat = 22.631435
+//        let testLon = 120.301950
+//        let testCoor = CLLocationCoordinate2D(latitude: testLat, longitude: testLon)
         
-        //let coordinate = location.coordinate
-        //let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 18.0)
-        let camera = GMSCameraPosition.camera(withLatitude: testCoor.latitude, longitude: testCoor.longitude, zoom: 18.0)
+        let coordinate = location.coordinate
+        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 18.0)
+        //let cameraForTest = GMSCameraPosition.camera(withLatitude: testCoor.latitude, longitude: testCoor.longitude, zoom: 18.0)
         mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
 
         self.mapUIView.addSubview(mapView)

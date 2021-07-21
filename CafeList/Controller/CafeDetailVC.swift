@@ -49,6 +49,7 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         tableView.allowsSelection = false
         
+        displayAlert(title: "小提醒", message: "如果星星數為零，可能是尚未上傳評分資訊，不代表這間店真實評價唷！")
     }
     
     func setMapView() {
@@ -76,6 +77,12 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: tableView.topAnchor).isActive = true
 
+    }
+    
+    func displayAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     // MARK: - UITableView Methods.
@@ -110,9 +117,6 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 
                 cell.descriptionLabel.text = "WiFi 穩定"
                 cell.ratingStars.rating = currentCafe.wifi
-                if cell.ratingStars.rating == 0 {
-                    cell.ratingStars.text = "評分數不足"
-                }
                 
                 return cell
                 
@@ -120,19 +124,13 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 
                 cell.descriptionLabel.text = "價格便宜"
                 cell.ratingStars.rating = currentCafe.cheap
-                if cell.ratingStars.rating == 0 {
-                    cell.ratingStars.text = "評分數不足"
-                }
-                
+
                 return cell
                 
             case 2:
                 
                 cell.descriptionLabel.text = "安靜程度"
                 cell.ratingStars.rating = currentCafe.quiet
-//                if cell.ratingStars.rating == 0 {
-//                    cell.ratingStars.text = "評分數不足"
-//                }
                 
                 return cell
                 
@@ -140,9 +138,6 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 
                 cell.descriptionLabel.text = "食物美味"
                 cell.ratingStars.rating = currentCafe.tasty
-//                if cell.ratingStars.rating == 0 {
-//                    cell.ratingStars.text = "評分數不足"
-//                }
                 
                 return cell
                 
@@ -150,9 +145,6 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 
                 cell.descriptionLabel.text = "裝潢音樂"
                 cell.ratingStars.rating = currentCafe.music
-                if cell.ratingStars.rating == 0 {
-                    cell.ratingStars.text = "評分數不足"
-                }
                 
                 return cell
                 
@@ -160,9 +152,6 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 
                 cell.descriptionLabel.text = "通常有位"
                 cell.ratingStars.rating = currentCafe.seat
-                if cell.ratingStars.rating == 0 {
-                    cell.ratingStars.text = "評分數不足"
-                }
                 
                 return cell
                 

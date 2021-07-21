@@ -10,7 +10,8 @@ import CoreLocation
 
 class CafeListVC: UITableViewController, UISearchResultsUpdating {
     
-    let cafeManager = CafeManager.shared
+    @IBOutlet var emptyCafeView: UIView!
+    
     let locationManager = CLLocationManager()
     let myColor = Colors.shared
     
@@ -26,6 +27,10 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Prepare for empty view
+        tableView.backgroundView = emptyCafeView
+        tableView.backgroundView?.isHidden = true
         
         getCafeList()
         tableView.reloadData()
@@ -119,7 +124,14 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        
+        if CafeManager.cafeList.count > 0 {
+            tableView.backgroundView?.isHidden = true
+        } else {
+            tableView.backgroundView?.isHidden = false
+            tableView.separatorStyle = .none
+        }
+        
         return 1
     }
     
@@ -145,7 +157,7 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
         // 判斷是從搜尋結果或原本陣列取得咖啡廳
         let cafe = (searchController.isActive) ? searchResults[indexPath.row] : CafeManager.cafeList[indexPath.row]
         
-        // Configure cell
+        // Configure name and location labels
         cell.nameLabel.text = cafe.name
         cell.locationLabel.text = cafe.address
         

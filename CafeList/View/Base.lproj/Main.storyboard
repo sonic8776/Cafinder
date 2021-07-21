@@ -179,9 +179,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="549.60000000000002" y="1584.5577211394304"/>
+            <point key="canvasLocation" x="3759" y="-1416"/>
         </scene>
-        <!--Cafe List-->
+        <!--探索-->
         <scene sceneID="gc6-9n-hJg">
             <objects>
                 <tableViewController id="JYk-K2-zGI" customClass="CafeListVC" customModule="CafeList" customModuleProvider="target" sceneMemberID="viewController">
@@ -297,15 +297,37 @@
                             <outlet property="delegate" destination="JYk-K2-zGI" id="Rtn-vq-Efu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Cafe List" id="kJ4-nk-yNp">
+                    <navigationItem key="navigationItem" title="探索" id="kJ4-nk-yNp">
                         <barButtonItem key="backBarButtonItem" title=" " id="XNP-FZ-h9T"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="emptyCafeView" destination="vYN-sx-CmG" id="98x-Dp-Ag6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Wp-eP-out" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="vYN-sx-CmG">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Empty View" translatesAutoresizingMaskIntoConstraints="NO" id="XWy-82-JIs">
+                            <rect key="frame" x="28" y="180" width="358" height="398.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="XWy-82-JIs" secondAttribute="height" multiplier="80:89" id="xn7-Nr-ypW"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="9Fi-bc-K1Y"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="XWy-82-JIs" firstAttribute="leading" secondItem="9Fi-bc-K1Y" secondAttribute="leading" constant="28" id="UwQ-uQ-Eao"/>
+                        <constraint firstItem="9Fi-bc-K1Y" firstAttribute="trailing" secondItem="XWy-82-JIs" secondAttribute="trailing" constant="28" id="yZg-0p-Sxs"/>
+                        <constraint firstItem="XWy-82-JIs" firstAttribute="top" secondItem="9Fi-bc-K1Y" secondAttribute="top" constant="180" id="zDt-8s-j78"/>
+                    </constraints>
+                </view>
             </objects>
-            <point key="canvasLocation" x="549.60000000000002" y="859.52023988005999"/>
+            <point key="canvasLocation" x="2961" y="-1416"/>
         </scene>
-        <!--Cafe Map-->
+        <!--地圖-->
         <scene sceneID="PN0-7p-Nbc">
             <objects>
                 <viewController id="6IX-27-f8f" customClass="GoogleMapVC" customModule="CafeList" customModuleProvider="target" sceneMemberID="viewController">
@@ -327,30 +349,88 @@
                             <constraint firstItem="98M-z2-Aul" firstAttribute="trailing" secondItem="sOt-8f-eP2" secondAttribute="trailing" id="c5z-er-Tq1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Cafe Map" id="r1c-oT-Wlf"/>
+                    <navigationItem key="navigationItem" title="地圖" id="r1c-oT-Wlf"/>
                     <connections>
                         <outlet property="mapUIView" destination="98M-z2-Aul" id="IHP-MD-OGi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQh-W2-aey" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1386" y="860"/>
+            <point key="canvasLocation" x="2961" y="-629"/>
         </scene>
-        <!--AboutVC-->
+        <!--About-->
         <scene sceneID="azN-lZ-5yF">
             <objects>
                 <viewController id="aBF-oo-i3a" customClass="AboutVC" customModule="CafeList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UXe-Z1-f2D">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kys-gE-A3f">
+                                <rect key="frame" x="0.0" y="164" width="375" height="454"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="aboutCell" textLabel="6YF-n7-pYO" detailTextLabel="DmZ-LT-N2i" style="IBUITableViewCellStyleValue1" id="lE1-qF-PhA">
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lE1-qF-PhA" id="xSG-W9-PnX">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6YF-n7-pYO">
+                                                    <rect key="frame" x="16" y="12" width="31.5" height="19.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DmZ-LT-N2i">
+                                                    <rect key="frame" x="317" y="12" width="42" height="19.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHX-KW-qHz" userLabel="LogoView">
+                                <rect key="frame" x="0.0" y="44" width="375" height="120"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="About" translatesAutoresizingMaskIntoConstraints="NO" id="mo1-ZH-ojz">
+                                        <rect key="frame" x="164" y="36.5" width="47" height="47"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="mo1-ZH-ojz" firstAttribute="centerY" secondItem="NHX-KW-qHz" secondAttribute="centerY" id="Nz8-QC-5h4"/>
+                                    <constraint firstItem="mo1-ZH-ojz" firstAttribute="centerX" secondItem="NHX-KW-qHz" secondAttribute="centerX" id="v1V-U6-7f0"/>
+                                    <constraint firstAttribute="height" constant="120" id="zDH-1u-jzm"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Ipn-xH-Ugh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="NHX-KW-qHz" firstAttribute="trailing" secondItem="Ipn-xH-Ugh" secondAttribute="trailing" id="4Mf-6Z-p1T"/>
+                            <constraint firstItem="Kys-gE-A3f" firstAttribute="top" secondItem="NHX-KW-qHz" secondAttribute="bottom" id="4Zy-Ig-tS9"/>
+                            <constraint firstItem="Kys-gE-A3f" firstAttribute="leading" secondItem="Ipn-xH-Ugh" secondAttribute="leading" id="O3V-zz-f63"/>
+                            <constraint firstItem="NHX-KW-qHz" firstAttribute="leading" secondItem="Ipn-xH-Ugh" secondAttribute="leading" id="STl-eV-BaR"/>
+                            <constraint firstItem="Kys-gE-A3f" firstAttribute="trailing" secondItem="Ipn-xH-Ugh" secondAttribute="trailing" id="ZoG-F3-HOA"/>
+                            <constraint firstItem="Kys-gE-A3f" firstAttribute="bottom" secondItem="Ipn-xH-Ugh" secondAttribute="bottom" id="bjd-50-Fce"/>
+                            <constraint firstItem="NHX-KW-qHz" firstAttribute="top" secondItem="Ipn-xH-Ugh" secondAttribute="top" id="kW7-Hl-TqX"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="KnO-6r-cKY"/>
+                    <navigationItem key="navigationItem" title="About" id="KnO-6r-cKY"/>
+                    <connections>
+                        <outlet property="tableView" destination="Kys-gE-A3f" id="t6j-es-Zwx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ty-UD-qJP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2233" y="860"/>
+            <point key="canvasLocation" x="2960.8000000000002" y="151.57421289355324"/>
         </scene>
         <!--Cafe Tab Bar Controller-->
         <scene sceneID="tKc-8s-fao">
@@ -371,11 +451,11 @@
             </objects>
             <point key="canvasLocation" x="1161" y="-629"/>
         </scene>
-        <!--CafeList-->
+        <!--探索-->
         <scene sceneID="h5G-At-tD6">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4dy-fT-YOi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="CafeList" image="list.dash" catalog="system" id="234-Ah-Ejk"/>
+                    <tabBarItem key="tabBarItem" title="探索" image="magnifyingglass" catalog="system" id="234-Ah-Ejk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Mdc-iJ-Kln">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
@@ -388,13 +468,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hQm-Hf-Lro" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="550.72463768115949" y="123.88392857142857"/>
+            <point key="canvasLocation" x="2145" y="-1416"/>
         </scene>
-        <!--Map-->
+        <!--地圖-->
         <scene sceneID="5u6-QN-E5R">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Auw-YU-wWQ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" id="JFe-Wz-Y1d"/>
+                    <tabBarItem key="tabBarItem" title="地圖" image="map" catalog="system" id="JFe-Wz-Y1d"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mYj-PK-Hya">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -407,13 +487,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rq1-dt-3zG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1386" y="124"/>
+            <point key="canvasLocation" x="2145" y="-629"/>
         </scene>
-        <!--Item-->
+        <!--關於-->
         <scene sceneID="g6M-MW-WOZ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5FX-Ic-x5w" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="info.circle" catalog="system" id="2xV-Gd-I93"/>
+                    <tabBarItem key="tabBarItem" title="關於" image="info.circle" catalog="system" id="2xV-Gd-I93"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WSe-NM-Mh4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -426,20 +506,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mdx-e9-jHw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2233" y="124"/>
+            <point key="canvasLocation" x="2146" y="152"/>
         </scene>
     </scenes>
     <designables>
+        <designable name="8nF-pg-Cqn">
+            <size key="intrinsicContentSize" width="135" height="23"/>
+        </designable>
         <designable name="b5D-FB-LzF">
             <size key="intrinsicContentSize" width="69" height="20.5"/>
         </designable>
     </designables>
     <resources>
+        <image name="About" width="47" height="47"/>
         <image name="Disclosure Only" width="21" height="36"/>
+        <image name="Empty View" width="595" height="842"/>
         <image name="Star" width="48" height="46"/>
         <image name="Star_Empty" width="48" height="46"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>
-        <image name="list.dash" catalog="system" width="128" height="85"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

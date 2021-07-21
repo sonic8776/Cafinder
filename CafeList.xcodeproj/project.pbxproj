@@ -134,7 +134,6 @@
 			children = (
 				DE75065C267B418B001345F2 /* AppDelegate.swift */,
 				DE75065E267B418B001345F2 /* SceneDelegate.swift */,
-				DECB0D9C267C941500833614 /* Colors.swift */,
 				DE750683267C4EB6001345F2 /* Model */,
 				DE750687267C4ED5001345F2 /* View */,
 				DE750681267C4EA4001345F2 /* Controller */,
@@ -162,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				DE750673267B4645001345F2 /* Cafe.swift */,
+				DECB0D9C267C941500833614 /* Colors.swift */,
 				DEFFE67E2687751D00E654A5 /* CafeManager.swift */,
 			);
 			path = Model;

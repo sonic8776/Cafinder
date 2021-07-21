@@ -9,15 +9,10 @@ import Foundation
 
 class CafeManager {
     
-    static let shared = CafeManager()
+    //static let shared = CafeManager()
     
     static var cafeList = [Cafe]()
-    
-
-    
-    
-    
-    
+     
 }
 
 
