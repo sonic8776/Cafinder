@@ -40,6 +40,10 @@
 		DE7506B0267C77BE001345F2 /* Rubik-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE7506AE267C77BE001345F2 /* Rubik-VariableFont_wght.ttf */; };
 		DE7A7C15269E97CF00315E98 /* CafeDetailRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7A7C14269E97CF00315E98 /* CafeDetailRatingCell.swift */; };
 		DE9CD5582686D5E000F9B4F6 /* GoogleMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9CD5572686D5E000F9B4F6 /* GoogleMapVC.swift */; };
+		DEB061E826A8150200CD9FEB /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEB061E726A8150200CD9FEB /* Onboarding.storyboard */; };
+		DEB061EA26A81DE600CD9FEB /* WalkthroughContentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB061E926A81DE600CD9FEB /* WalkthroughContentVC.swift */; };
+		DEB061EC26A81FDE00CD9FEB /* WalkthroughPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB061EB26A81FDE00CD9FEB /* WalkthroughPageVC.swift */; };
+		DEB061EE26A8239A00CD9FEB /* WalkthroughVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB061ED26A8239A00CD9FEB /* WalkthroughVC.swift */; };
 		DECB0D9D267C941500833614 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECB0D9C267C941500833614 /* Colors.swift */; };
 		DEFFE67F2687751D00E654A5 /* CafeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFFE67E2687751D00E654A5 /* CafeManager.swift */; };
 		EBAFCEBE2EEB23F4391C0AB6 /* Pods_CafeList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47788F24B60511754248565A /* Pods_CafeList.framework */; };
@@ -84,6 +88,10 @@
 		DE7506AE267C77BE001345F2 /* Rubik-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		DE7A7C14269E97CF00315E98 /* CafeDetailRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeDetailRatingCell.swift; sourceTree = "<group>"; };
 		DE9CD5572686D5E000F9B4F6 /* GoogleMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapVC.swift; sourceTree = "<group>"; };
+		DEB061E726A8150200CD9FEB /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		DEB061E926A81DE600CD9FEB /* WalkthroughContentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughContentVC.swift; sourceTree = "<group>"; };
+		DEB061EB26A81FDE00CD9FEB /* WalkthroughPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughPageVC.swift; sourceTree = "<group>"; };
+		DEB061ED26A8239A00CD9FEB /* WalkthroughVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughVC.swift; sourceTree = "<group>"; };
 		DECB0D9C267C941500833614 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		DEFFE67E2687751D00E654A5 /* CafeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +161,9 @@
 				DE9CD5572686D5E000F9B4F6 /* GoogleMapVC.swift */,
 				DE300087269C4139005772F0 /* AboutVC.swift */,
 				DE30008B269C4299005772F0 /* CafeTabBarController.swift */,
+				DEB061E926A81DE600CD9FEB /* WalkthroughContentVC.swift */,
+				DEB061EB26A81FDE00CD9FEB /* WalkthroughPageVC.swift */,
+				DEB061ED26A8239A00CD9FEB /* WalkthroughVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -182,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				DE750662267B418B001345F2 /* Main.storyboard */,
+				DEB061E726A8150200CD9FEB /* Onboarding.storyboard */,
 				DE300075269B407B005772F0 /* paddingLabel.swift */,
 			);
 			path = View;
@@ -298,6 +310,7 @@
 				DE750666267B418D001345F2 /* Assets.xcassets in Resources */,
 				DE75069F267C77AD001345F2 /* Rubik-SemiBoldItalic.ttf in Resources */,
 				DE7506AF267C77BE001345F2 /* Rubik-Italic-VariableFont_wght.ttf in Resources */,
+				DEB061E826A8150200CD9FEB /* Onboarding.storyboard in Resources */,
 				DE750664267B418B001345F2 /* Main.storyboard in Resources */,
 				DE7506AA267C77AD001345F2 /* Rubik-ExtraBoldItalic.ttf in Resources */,
 				DE7506A1267C77AD001345F2 /* Rubik-ExtraBold.ttf in Resources */,
@@ -375,8 +388,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB061EC26A81FDE00CD9FEB /* WalkthroughPageVC.swift in Sources */,
 				DE750674267B4645001345F2 /* Cafe.swift in Sources */,
 				DE75067F267C4DD2001345F2 /* CafeDetailTextCell.swift in Sources */,
+				DEB061EE26A8239A00CD9FEB /* WalkthroughVC.swift in Sources */,
 				DE750661267B418B001345F2 /* CafeDetailVC.swift in Sources */,
 				DE9CD5582686D5E000F9B4F6 /* GoogleMapVC.swift in Sources */,
 				DE75065D267B418B001345F2 /* AppDelegate.swift in Sources */,
@@ -384,6 +399,7 @@
 				DE68B9EF269B33C6007A9ACA /* CafeListCell.swift in Sources */,
 				DE300076269B407B005772F0 /* paddingLabel.swift in Sources */,
 				DE75067C267C4B63001345F2 /* CafeDetailIconTextCell.swift in Sources */,
+				DEB061EA26A81DE600CD9FEB /* WalkthroughContentVC.swift in Sources */,
 				DE7A7C15269E97CF00315E98 /* CafeDetailRatingCell.swift in Sources */,
 				DE75065F267B418B001345F2 /* SceneDelegate.swift in Sources */,
 				DECB0D9D267C941500833614 /* Colors.swift in Sources */,

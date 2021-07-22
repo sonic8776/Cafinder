@@ -19,14 +19,16 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
     private var mapView = GMSMapView()
     private var clusterManager: GMUClusterManager!
     
-    var cafeManager = CafeManager()
-    //var cafeList = [Cafe]()
+    var didShowMap = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        manager.requestWhenInUseAuthorization()
-        manager.requestAlwaysAuthorization()
+        //self.mapUIView.addSubview(mapView)
+        
+        // Insets are specified in this order: top, left, bottom, right
+//        let mapInsets = UIEdgeInsets(top: 100.0, left: 0.0, bottom: 0.0, right: 300.0)
+//        mapView.padding = mapInsets
         
         let textAttributes = [NSAttributedString.Key.foregroundColor: myColor.primaryColor]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
@@ -43,7 +45,7 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         // Register self to listen to GMSMapViewDelegate events.
         clusterManager.setMapDelegate(self)
         
-        showCafesOnMap()
+        //showCafesOnMap()
         
         if !CLLocationManager.locationServicesEnabled() {
             displayAlert(title: "Oops!", message: "請開啟定位服務，才能顯示您的位置唷！")
@@ -139,57 +141,70 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
                 
                 let location = CLLocationCoordinate2D(latitude: lat, longitude: lon)
                 
-                let marker = GMSMarker()
-                marker.position = location
-                marker.appearAnimation = .pop
-                marker.title = data.name
-                marker.icon = GMSMarker.markerImage(with: .brown)
-                marker.map = mapView
-                clusterManager.add(marker)
+                if CLLocationCoordinate2DIsValid(location) {
+                    
+                    let marker = GMSMarker(position: location)
+                    marker.position = location
+                    marker.appearAnimation = .pop
+                    marker.title = data.name
+                    marker.icon = GMSMarker.markerImage(with: .brown)
+                    marker.map = mapView
+                    clusterManager.add(marker)
+                    
+                } else {
+                    print("Invalid location: \(data.name), (\(location.latitude), \(location.longitude))")
+                }
             }
         }
-        //clusterManager.cluster()
         self.mapUIView.addSubview(mapView)
+        clusterManager.cluster()
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-      // center the map on tapped marker
+      // Center the map on tapped marker
       mapView.animate(toLocation: marker.position)
-      // check if a cluster icon was tapped
+      // Check if a cluster icon was tapped
       if marker.userData is GMUCluster {
-        // zoom in on tapped cluster
+        // Zoom in on tapped cluster
         mapView.animate(toZoom: mapView.camera.zoom + 1)
-        NSLog("Did tap cluster")
+        print("Did tap cluster")
         return true
       }
-
-      NSLog("Did tap a normal marker")
+        
+        
+        
+      print("Did tap a normal marker")
       return false
+    }
+    
+    // Tap info window of marker to see cafe detail
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+       
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Show the user's current location with blue pot.
         guard let location = locations.first else { return }
         
-//        let testLat = 22.631435
-//        let testLon = 120.301950
-//        let testCoor = CLLocationCoordinate2D(latitude: testLat, longitude: testLon)
-        
         let coordinate = location.coordinate
         let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 18.0)
-        //let cameraForTest = GMSCameraPosition.camera(withLatitude: testCoor.latitude, longitude: testCoor.longitude, zoom: 18.0)
-        mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)
 
-        self.mapUIView.addSubview(mapView)
-        showCafesOnMap()
-        manager.stopUpdatingLocation()
+        // Insets are specified in this order: top, left, bottom, right
+        let mapInsets = UIEdgeInsets(top: 100.0, left: 0.0, bottom: 0.0, right: 300.0)
+        mapView.padding = mapInsets
         
-        // Creates a marker in the center of the map.
-        //        let marker = GMSMarker()
-        //        marker.position = coordinate
-        //        marker.title = "HK"
-        //        marker.snippet = "China"
-        //        marker.map = mapView
+        mapView = GMSMapView.map(withFrame: CGRect(x:0, y:0, width:self.view.bounds.width, height:self.view.bounds.height - self.tabBarController!.tabBar.frame.height), camera: camera)
+
+        //self.mapUIView.addSubview(mapView)
+        //showCafesOnMap()
+        //manager.stopUpdatingLocation()
+        
+        
+        if !didShowMap {
+            showCafesOnMap()
+            didShowMap = true
+            manager.stopUpdatingLocation()
+        }
+
     }
-    
 }

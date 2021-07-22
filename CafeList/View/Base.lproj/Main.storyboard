@@ -181,7 +181,7 @@
             </objects>
             <point key="canvasLocation" x="3759" y="-1416"/>
         </scene>
-        <!--探索-->
+        <!--Cafe List-->
         <scene sceneID="gc6-9n-hJg">
             <objects>
                 <tableViewController id="JYk-K2-zGI" customClass="CafeListVC" customModule="CafeList" customModuleProvider="target" sceneMemberID="viewController">
@@ -201,7 +201,7 @@
                                             <rect key="frame" x="15" y="7.5" width="345" height="118"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MRTLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5D-FB-LzF" customClass="PaddingLabel" customModule="CafeList" customModuleProvider="target">
-                                                    <rect key="frame" x="257" y="81.5" width="73" height="20.5"/>
+                                                    <rect key="frame" x="257" y="87.5" width="73" height="14.5"/>
                                                     <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="73" id="ZLr-ld-qTd"/>
@@ -297,7 +297,7 @@
                             <outlet property="delegate" destination="JYk-K2-zGI" id="Rtn-vq-Efu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="探索" id="kJ4-nk-yNp">
+                    <navigationItem key="navigationItem" title="Cafe List" id="kJ4-nk-yNp">
                         <barButtonItem key="backBarButtonItem" title=" " id="XNP-FZ-h9T"/>
                     </navigationItem>
                     <connections>
@@ -327,7 +327,7 @@
             </objects>
             <point key="canvasLocation" x="2961" y="-1416"/>
         </scene>
-        <!--地圖-->
+        <!--咖啡廳地圖-->
         <scene sceneID="PN0-7p-Nbc">
             <objects>
                 <viewController id="6IX-27-f8f" customClass="GoogleMapVC" customModule="CafeList" customModuleProvider="target" sceneMemberID="viewController">
@@ -349,7 +349,7 @@
                             <constraint firstItem="98M-z2-Aul" firstAttribute="trailing" secondItem="sOt-8f-eP2" secondAttribute="trailing" id="c5z-er-Tq1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="地圖" id="r1c-oT-Wlf"/>
+                    <navigationItem key="navigationItem" title="咖啡廳地圖" id="r1c-oT-Wlf"/>
                     <connections>
                         <outlet property="mapUIView" destination="98M-z2-Aul" id="IHP-MD-OGi"/>
                     </connections>
@@ -510,11 +510,8 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="8nF-pg-Cqn">
-            <size key="intrinsicContentSize" width="135" height="23"/>
-        </designable>
         <designable name="b5D-FB-LzF">
-            <size key="intrinsicContentSize" width="69" height="20.5"/>
+            <size key="intrinsicContentSize" width="59" height="14.5"/>
         </designable>
     </designables>
     <resources>

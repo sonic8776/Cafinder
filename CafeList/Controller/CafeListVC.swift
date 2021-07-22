@@ -25,6 +25,20 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
         navigationItem.hidesSearchBarWhenScrolling = false
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
+//            return
+//        }
+        
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughVC {
+            //walkthroughViewController.modalPresentationStyle = .fullScreen
+            present(walkthroughViewController, animated: true, completion: nil)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,7 +48,6 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
         
         getCafeList()
         tableView.reloadData()
-        locationManager.requestWhenInUseAuthorization() // 詢問時機待優化
         
         // Set searchController
         self.navigationItem.searchController = searchController
@@ -67,7 +80,6 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
                 NSAttributedString.Key.font: customFont
             ]
         }
-        
     }
     
     func getCafeList(){
@@ -93,7 +105,6 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
             }
         }
         task.resume()
-        locationManager.requestWhenInUseAuthorization() // 詢問時機待優化
     }
     
     // MARK: - UISearchController methods

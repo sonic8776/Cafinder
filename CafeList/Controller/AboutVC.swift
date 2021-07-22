@@ -14,18 +14,7 @@ class AboutVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     let myColor = Colors.shared
     var sectionTitles = ["支持我們", "關於本軟體"]
-    
-//    var sectionContent = [
-//        [(image: "doc.badge.plus", text: "新增店家", link: "https://cafenomad.tw/contribute"),
-//         (image: "star.circle", text: "在 App Store 給我們評分", link: ""),
-//         (image: "square.and.pencil", text: "寫信給開發者", link: ""),
-//         (image: "display", text: "Cafinder 官網", link: ""),
-//         (image: "display", text: "Cafe Nomad 官網", link: "https://cafenomad.tw")
-//        ],
-//        [(image: "info.circle", text: "版本", link: ""),
-//         (image: "doc", text: "隱私權條款", link: "")
-//        ]
-//    ]
+    var sectionHeaderHeight: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +38,7 @@ class AboutVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         
         tableView.tableFooterView = UIView() // remove unused seperators
+        sectionHeaderHeight = tableView.dequeueReusableCell(withIdentifier: "headerCell")?.contentView.bounds.height ?? 0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -63,8 +53,30 @@ class AboutVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitles[section]
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return sectionHeaderHeight
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
+        
+        let label = UILabel()
+        label.frame = CGRect.init(x: 20, y: 0, width: headerView.frame.width-10, height: headerView.frame.height-10)
+        
+        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.textColor = myColor.primaryColor
+        
+        if section == 0 {
+            label.text = "支持我們"
+        } else {
+            label.text = "關於本軟體"
+        }
+        
+        headerView.addSubview(label)
+        
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -145,17 +157,6 @@ class AboutVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destination.
- // Pass the selected object to the new view controller.
- }
- */
-
 
 extension AboutVC: MFMailComposeViewControllerDelegate {
     

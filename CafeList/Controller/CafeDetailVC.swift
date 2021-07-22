@@ -49,7 +49,7 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         tableView.allowsSelection = false
         
-        displayAlert(title: "小提醒", message: "如果星星數為零，可能是尚未上傳評分資訊，不代表這間店真實評價唷！")
+        //displayAlert(title: "小提醒", message: "如果星星數為零，可能是尚未上傳評分資訊，不代表這間店真實評價唷！")
     }
     
     func setMapView() {
