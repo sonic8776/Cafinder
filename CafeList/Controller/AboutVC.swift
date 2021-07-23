@@ -162,13 +162,19 @@ extension AboutVC: MFMailComposeViewControllerDelegate {
     
     func displayAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "好唷", style: .default, handler: { action in
+        let confirm = UIAlertAction(title: "好唷", style: .default, handler: { action in
             if let url = URL(string: "https://cafenomad.tw/contribute") {
                 let controller = SFSafariViewController(url: url)
                 self.present(controller, animated: true, completion: nil)
             }
-        }))
+        })
+        let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        
+        alert.addAction(confirm)
+        alert.addAction(cancel)
+        alert.view.tintColor = myColor.primaryColor
+        alert.preferredAction = confirm
+        
         present(alert, animated: true, completion: nil)
     }
     
@@ -178,7 +184,7 @@ extension AboutVC: MFMailComposeViewControllerDelegate {
         case 0:
             if indexPath.row == 0 {
                 
-                displayAlert(title: "友善提醒", message: "將跳轉至 Cafe Nomad 網站，請登入臉書後點右上選單 -> 新增店家")
+                displayAlert(title: "友善提醒", message: "將跳轉至 Cafe Nomad 網站，請登入臉書後點右上選單 > 新增店家")
             }
             
             if indexPath.row == 1 {

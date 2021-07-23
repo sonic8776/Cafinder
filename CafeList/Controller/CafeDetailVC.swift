@@ -16,15 +16,18 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     let manager = CLLocationManager()
     let myColor = Colors.shared
     
+    var webURL: String?
+    
     @IBOutlet var tableView : UITableView!
     @IBOutlet weak var mapUIView: UIView!
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.hidesBarsOnSwipe = false
         navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        webURL = currentCafe.weburl
     }
     
     override func viewDidLoad() {
@@ -37,19 +40,18 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.activityType = .automotiveNavigation
-        
+                
         tableView.separatorStyle = .none
         // 導覽列變透明
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
+        //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //        navigationController?.navigationBar.shadowImage = UIImage()
         // 導覽列按鈕文字顏色
         navigationController?.navigationBar.tintColor = myColor.primaryDarkColor
         // 不要調整內容的區域，讓內容蓋住透明的導覽列
-//        tableView.contentInsetAdjustmentBehavior = .never
+        //        tableView.contentInsetAdjustmentBehavior = .never
         
         tableView.allowsSelection = false
         
-        //displayAlert(title: "小提醒", message: "如果星星數為零，可能是尚未上傳評分資訊，不代表這間店真實評價唷！")
     }
     
     func setMapView() {
@@ -65,6 +67,7 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         marker.position = coordinate
         marker.title = currentCafe.name
         marker.snippet = currentCafe.address
+        marker.icon = GMSMarker.markerImage(with: .brown)
         marker.map = mapView
         mapView.selectedMarker = marker
         
@@ -76,13 +79,28 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         mapView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: tableView.topAnchor).isActive = true
-
+        
+    }
+    
+    @IBAction func linkBtnPressed(_ sender: UIButton) {
+        guard let safeURL = webURL else {
+            print("webURL is nil.")
+            return
+        }
+        
+        if let url = URL(string: safeURL) {
+            UIApplication.shared.open(url)
+        } else {
+            print("Website URL is not correct")
+            displayAlert(title: "不好意思！", message: "這個網址好像失效了")
+        }
     }
     
     func displayAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "好吧", style: .default, handler: nil)
+        controller.addAction(okAction)
+        present(controller, animated: true, completion: nil)
     }
     
     // MARK: - UITableView Methods.
@@ -92,7 +110,7 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return 11
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,7 +142,7 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 
                 cell.descriptionLabel.text = "價格便宜"
                 cell.ratingStars.rating = currentCafe.cheap
-
+                
                 return cell
                 
             case 2:
@@ -159,7 +177,7 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 fatalError("Failed to instantiate the table view cell for detail view controller")
             }
             
-        } else {
+        } else if indexPath.row <= 9 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CafeDetailTextCell.self), for: indexPath) as! CafeDetailTextCell
             cell.descriptionLabel.textColor = myColor.primaryColor
@@ -183,7 +201,7 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 }
                 
                 return cell
-            
+                
             case 7:
                 
                 cell.descriptionLabel.text = "營業時間"
@@ -213,13 +231,39 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             case 9:
                 
                 cell.descriptionLabel.text = "鄰近捷運"
-                cell.rightLabel.text = currentCafe.mrt
+                if currentCafe.mrt != "" {
+                    cell.rightLabel.text = currentCafe.mrt
+                } else {
+                    cell.rightLabel.text = "未提供資訊"
+                }
                 
                 return cell
                 
             default:
                 fatalError("Failed to instantiate the table view cell for detail view controller")
             }
+        } else {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: HyperLinkCell.self), for: indexPath) as! HyperLinkCell
+            cell.webURLLabel.text = "官網 / 粉專"
+            cell.webURLLabel.textColor = myColor.primaryColor
+            cell.linkButton.setTitleColor(myColor.primaryColor, for: .normal)
+            
+            if webURL == nil {
+                cell.linkButton.setTitle("未提供資訊", for: .normal)
+            } else {
+                
+                let attributes: [NSAttributedString.Key: Any] = [
+                      .underlineStyle: NSUnderlineStyle.single.rawValue
+                  ]
+                let attributeString = NSMutableAttributedString(
+                      string: "點擊前往",
+                      attributes: attributes
+                   )
+                cell.linkButton.setAttributedTitle(attributeString, for: .normal)
+            }
+            
+            return cell
         }
         
     }

@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZMU-uo-Zqh">
-                                <rect key="frame" x="0.0" y="371" width="375" height="247"/>
+                                <rect key="frame" x="0.0" y="319" width="375" height="299"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CafeDetailIconTextCell" id="Dyq-JM-iA3" customClass="CafeDetailIconTextCell" customModule="CafeList" customModuleProvider="target">
@@ -67,7 +67,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGm-Jc-KXf">
-                                                    <rect key="frame" x="20" y="13" width="38.5" height="18"/>
+                                                    <rect key="frame" x="20" y="13" width="100" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="jeI-wG-h4k"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -145,6 +148,44 @@
                                             <outlet property="textLabel" destination="geA-it-Law" id="nIc-AO-clh"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HyperLinkCell" id="bul-FZ-aCx" customClass="HyperLinkCell" customModule="CafeList" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="157" width="375" height="44.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bul-FZ-aCx" id="8Vq-bA-nZB">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9C-MX-Qa7">
+                                                    <rect key="frame" x="20" y="11" width="336" height="18.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="bgU-mX-kZ6"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8J-8C-5Zj">
+                                                    <rect key="frame" x="293" y="7.5" width="62" height="30"/>
+                                                    <state key="normal" title="點擊前往"/>
+                                                    <connections>
+                                                        <action selector="linkBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wr0-3V-8tB"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="M8J-8C-5Zj" firstAttribute="centerY" secondItem="8Vq-bA-nZB" secondAttribute="centerY" id="HET-i8-KsS"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="p9C-MX-Qa7" secondAttribute="bottom" constant="4" id="HOG-h8-Imb"/>
+                                                <constraint firstItem="p9C-MX-Qa7" firstAttribute="top" secondItem="8Vq-bA-nZB" secondAttribute="topMargin" id="ZQF-AR-Xzp"/>
+                                                <constraint firstItem="p9C-MX-Qa7" firstAttribute="leading" secondItem="8Vq-bA-nZB" secondAttribute="leading" constant="20" id="ZdE-qr-WO8"/>
+                                                <constraint firstAttribute="trailing" secondItem="M8J-8C-5Zj" secondAttribute="trailing" constant="20" id="b6b-9n-wa1"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="p9C-MX-Qa7" secondAttribute="trailing" constant="3" id="tEp-Lt-bKQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="linkButton" destination="M8J-8C-5Zj" id="6JM-DN-bia"/>
+                                            <outlet property="webURLLabel" destination="p9C-MX-Qa7" id="t2f-Yc-8ph"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="4wN-pu-mdh"/>
@@ -152,7 +193,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dY7-Th-Nvq">
-                                <rect key="frame" x="16" y="96" width="343" height="250"/>
+                                <rect key="frame" x="16" y="44" width="343" height="250"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="dWW-F6-mMA"/>
@@ -179,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3759" y="-1416"/>
+            <point key="canvasLocation" x="3757.5999999999999" y="-1416.3418290854574"/>
         </scene>
         <!--Cafe List-->
         <scene sceneID="gc6-9n-hJg">
@@ -352,6 +393,7 @@
                     <navigationItem key="navigationItem" title="咖啡廳地圖" id="r1c-oT-Wlf"/>
                     <connections>
                         <outlet property="mapUIView" destination="98M-z2-Aul" id="IHP-MD-OGi"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="checkDetailFromMap" id="Lon-rZ-0w4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQh-W2-aey" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -514,6 +556,9 @@
             <size key="intrinsicContentSize" width="59" height="14.5"/>
         </designable>
     </designables>
+    <inferredMetricsTieBreakers>
+        <segue reference="Lon-rZ-0w4"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="About" width="47" height="47"/>
         <image name="Disclosure Only" width="21" height="36"/>

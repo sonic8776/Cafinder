@@ -28,13 +28,13 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
-//            return
-//        }
+        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
+            return
+        }
         
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughVC {
-            //walkthroughViewController.modalPresentationStyle = .fullScreen
+            walkthroughViewController.modalPresentationStyle = .fullScreen
             present(walkthroughViewController, animated: true, completion: nil)
         }
     }
