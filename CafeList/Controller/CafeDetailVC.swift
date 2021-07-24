@@ -83,7 +83,7 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     @IBAction func linkBtnPressed(_ sender: UIButton) {
-        guard let safeURL = webURL else {
+        guard let safeURL = webURL, safeURL != "" else {
             print("webURL is nil.")
             return
         }
@@ -100,6 +100,7 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "好吧", style: .default, handler: nil)
         controller.addAction(okAction)
+        controller.view.tintColor = myColor.primaryColor
         present(controller, animated: true, completion: nil)
     }
     
@@ -249,7 +250,7 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.webURLLabel.textColor = myColor.primaryColor
             cell.linkButton.setTitleColor(myColor.primaryColor, for: .normal)
             
-            if webURL == nil {
+            if webURL == nil || webURL == "" {
                 cell.linkButton.setTitle("未提供資訊", for: .normal)
             } else {
                 
@@ -270,28 +271,38 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
 }
 
+// MARK: - GMSMapViewDelegate
+
 extension CafeDetailVC: GMSMapViewDelegate {
+    
+    func openGoogleMapAlert() {
+        let alert = UIAlertController(title: "將開啟 Google Maps", message: "在 Google Maps 查看（座標可能有些微偏差）", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "確認", style: .default) { action in
+            let lat = self.currentCafe.latitude
+            let long = self.currentCafe.longitude
+            if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
+                UIApplication.shared.open(URL(string:"comgooglemaps://?center=\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.open(URL(string: "http://maps.google.com/maps?q=loc:\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
+            }
+        }
+        let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        alert.addAction(confirm)
+        alert.addAction(cancel)
+        alert.preferredAction = confirm
+        alert.view.tintColor = myColor.primaryColor
+        present(alert, animated: true, completion: nil)
+    }
     
     // Tap info window of marker to open Google Maps app or browser to see more information.
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        let lat = currentCafe.latitude
-        let long = currentCafe.longitude
-        if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
-            UIApplication.shared.open(URL(string:"comgooglemaps://?center=\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
-        } else {
-            UIApplication.shared.open(URL(string: "http://maps.google.com/maps?q=loc:\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
-        }
+        openGoogleMapAlert()
     }
     
     // Tap marker to open Google Maps app or browser to see more information.
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        let lat = currentCafe.latitude
-        let long = currentCafe.longitude
-        if UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!) {
-            UIApplication.shared.open(URL(string:"comgooglemaps://?center=\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
-        } else {
-            UIApplication.shared.open(URL(string: "http://maps.google.com/maps?q=loc:\(lat),\(long)&zoom=17&views=traffic&q=\(lat),\(long)")!, options: [:], completionHandler: nil)
-        }
+        openGoogleMapAlert()
+        
         return true
     }
 }

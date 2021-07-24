@@ -45,9 +45,9 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         let iconGenerator = GMUDefaultClusterIconGenerator()
         let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
         let renderer = GMUDefaultClusterRenderer(mapView: mapView,
-                                    clusterIconGenerator: iconGenerator)
+                                                 clusterIconGenerator: iconGenerator)
         clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
-
+        
         // Register self to listen to GMSMapViewDelegate events.
         clusterManager.setMapDelegate(self)
         
@@ -81,6 +81,8 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
             
             mapView.settings.myLocationButton = true
             mapView.isMyLocationEnabled = true
+            
+            showCafesOnMap()
         }
         
     }
@@ -133,23 +135,29 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-      // Center the map on tapped marker
-      mapView.animate(toLocation: marker.position)
-      // Check if a cluster icon was tapped
-      if marker.userData is GMUCluster {
-        // Zoom in on tapped cluster
-        mapView.animate(toZoom: mapView.camera.zoom + 1)
-        print("Did tap cluster")
-        return true
-      }
- 
-      print("Did tap a normal marker")
-      return false
+        // Center the map on tapped marker
+        mapView.animate(toLocation: marker.position)
+        // Check if a cluster icon was tapped
+        if marker.userData is GMUCluster {
+            // Zoom in on tapped cluster
+            mapView.animate(toZoom: mapView.camera.zoom + 1)
+            print("Did tap cluster")
+            return true
+        }
+        
+        //        let bounds = GMSCoordinateBounds(coordinate: self.userLocation!.coordinate, coordinate: marker.position)
+        //        self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 120.0))
+        self.mapView.camera = GMSCameraPosition.camera(withTarget: marker.position, zoom: 18.0)
+        let update = GMSCameraUpdate.zoom(by: 1)
+        mapView.animate(with: update)
+        
+        print("Did tap a normal marker")
+        return false
     }
     
     // Tap info window of marker to see cafe detail
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-       
+        
         performSegue(withIdentifier: "checkDetailFromMap", sender: marker)
         
     }
@@ -157,7 +165,7 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "checkDetailFromMap" {
             if let detailVC = segue.destination as? CafeDetailVC,
-                let marker = sender as? GMSMarker {
+               let marker = sender as? GMSMarker {
                 
                 for cafe in CafeManager.cafeList {
                     if cafe.name == marker.title {
@@ -183,26 +191,13 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         CATransaction.commit()
         
         
-        //let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 18.0)
-
-        // Insets are specified in this order: top, left, bottom, right
-        let mapInsets = UIEdgeInsets(top: 100.0, left: 0.0, bottom: 0.0, right: 300.0)
-        mapView.padding = mapInsets
-        
-//        mapView = GMSMapView.map(withFrame: CGRect(x:0, y:0, width:self.view.bounds.width, height:self.view.bounds.height - self.tabBarController!.tabBar.frame.height), camera: camera)
-
-        //self.mapUIView.addSubview(mapView)
-        //showCafesOnMap()
-        //manager.stopUpdatingLocation()
-        
-        
-//        if !didShowMap {
-//            showCafesOnMap()
-//            didShowMap = true
-//            manager.stopUpdatingLocation()
-//        }
+        //        if !didShowMap {
+        //            showCafesOnMap()
+        //            didShowMap = true
+        //            manager.stopUpdatingLocation()
+        //        }
         
         manager.stopUpdatingLocation()
-
+        
     }
 }
