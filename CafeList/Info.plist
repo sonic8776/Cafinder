@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Cafinder</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -19,12 +21,19 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>Font provided by application</key>
-	<string>Rubik-Medium.ttf</string>
+	<string>Ubuntu-Bold.ttf</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>googlegmail</string>
+		<string>ms-outlook</string>
+		<string>readdle-spark</string>
+		<string>ymail</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>分享您的位置資訊，以便查看您附近的咖啡廳。</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>分享您的位置資訊，以便查看您附近的咖啡廳。</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>分享您的位置資訊，以便查看您附近的咖啡廳。</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
@@ -72,12 +81,5 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>googlegmail</string>
-		<string>ms-outlook</string>
-		<string>readdle-spark</string>
-		<string>ymail</string>
-	</array>
 </dict>
 </plist>

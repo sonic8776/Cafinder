@@ -9,5 +9,6 @@ target 'CafeList' do
   pod 'GoogleMaps', '5.1.0.0'
   pod 'Cosmos'
   pod 'Google-Maps-iOS-Utils'
+  pod 'Firebase/Crashlytics'
 
 end

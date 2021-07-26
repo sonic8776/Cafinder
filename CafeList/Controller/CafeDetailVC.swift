@@ -40,8 +40,9 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.activityType = .automotiveNavigation
-                
+        
         tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         // 導覽列變透明
         //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         //        navigationController?.navigationBar.shadowImage = UIImage()
@@ -75,7 +76,7 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         // Set constraints to mapView
         mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        mapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         mapView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: tableView.topAnchor).isActive = true
@@ -114,6 +115,16 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         return 11
     }
     
+    func setTextCell(description: String, indexPath: IndexPath) -> CafeDetailTextCell {
+        let textCell = tableView.dequeueReusableCell(withIdentifier: String(describing: CafeDetailTextCell.self), for: indexPath) as! CafeDetailTextCell
+        textCell.descriptionLabel.text = description
+        textCell.descriptionLabel.textColor = myColor.primaryColor
+        textCell.rightLabel.text = "未提供資訊"
+        textCell.rightLabel.textColor = .darkGray
+        
+        return textCell
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row <= 5 {
@@ -134,45 +145,87 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             case 0:
                 
-                cell.descriptionLabel.text = "WiFi 穩定"
-                cell.ratingStars.rating = currentCafe.wifi
-                
-                return cell
+                if currentCafe.wifi == 0 {
+                    
+                    return setTextCell(description: "WiFi 穩定", indexPath: indexPath)
+                    
+                } else {
+                    
+                    cell.descriptionLabel.text = "WiFi 穩定"
+                    cell.ratingStars.rating = currentCafe.wifi
+                    
+                    return cell
+                }
                 
             case 1:
                 
-                cell.descriptionLabel.text = "價格便宜"
-                cell.ratingStars.rating = currentCafe.cheap
-                
-                return cell
+                if currentCafe.cheap == 0 {
+                    
+                    return setTextCell(description: "價格便宜", indexPath: indexPath)
+                    
+                } else {
+                    
+                    cell.descriptionLabel.text = "價格便宜"
+                    cell.ratingStars.rating = currentCafe.cheap
+                    
+                    return cell
+                }
                 
             case 2:
                 
-                cell.descriptionLabel.text = "安靜程度"
-                cell.ratingStars.rating = currentCafe.quiet
-                
-                return cell
+                if currentCafe.quiet == 0 {
+                    
+                    return setTextCell(description: "安靜程度", indexPath: indexPath)
+                    
+                } else {
+                    
+                    cell.descriptionLabel.text = "安靜程度"
+                    cell.ratingStars.rating = currentCafe.quiet
+                    
+                    return cell
+                }
                 
             case 3:
                 
-                cell.descriptionLabel.text = "食物美味"
-                cell.ratingStars.rating = currentCafe.tasty
-                
-                return cell
+                if currentCafe.tasty == 0 {
+                    
+                    return setTextCell(description: "食物美味", indexPath: indexPath)
+                    
+                } else {
+                    
+                    cell.descriptionLabel.text = "食物美味"
+                    cell.ratingStars.rating = currentCafe.tasty
+                    
+                    return cell
+                }
                 
             case 4:
                 
-                cell.descriptionLabel.text = "裝潢音樂"
-                cell.ratingStars.rating = currentCafe.music
-                
-                return cell
+                if currentCafe.music == 0 {
+                    
+                    return setTextCell(description: "裝潢音樂", indexPath: indexPath)
+                    
+                } else {
+                    
+                    cell.descriptionLabel.text = "裝潢音樂"
+                    cell.ratingStars.rating = currentCafe.music
+                    
+                    return cell
+                }
                 
             case 5:
                 
-                cell.descriptionLabel.text = "通常有位"
-                cell.ratingStars.rating = currentCafe.seat
-                
-                return cell
+                if currentCafe.seat == 0 {
+                    
+                    return setTextCell(description: "通常有位", indexPath: indexPath)
+                    
+                } else {
+                    
+                    cell.descriptionLabel.text = "通常有位"
+                    cell.ratingStars.rating = currentCafe.seat
+                    
+                    return cell
+                }
                 
             default:
                 fatalError("Failed to instantiate the table view cell for detail view controller")
@@ -198,7 +251,8 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 case "no":
                     cell.rightLabel.text = "一律不限時"
                 default:
-                    cell.rightLabel.text = "未提供限時資訊"
+                    cell.rightLabel.text = "未提供資訊"
+                    cell.rightLabel.textColor = .darkGray
                 }
                 
                 return cell
@@ -209,7 +263,8 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 if currentCafe.open_time != "" {
                     cell.rightLabel.text = currentCafe.open_time
                 } else {
-                    cell.rightLabel.text = "附近沒有捷運 / 未提供資訊"
+                    cell.rightLabel.text = "未提供資訊"
+                    cell.rightLabel.textColor = .darkGray
                 }
                 
                 return cell
@@ -224,7 +279,8 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 case "no":
                     cell.rightLabel.text = "無法"
                 default:
-                    cell.rightLabel.text = "未提供站位資訊"
+                    cell.rightLabel.text = "未提供資訊"
+                    cell.rightLabel.textColor = .darkGray
                 }
                 
                 return cell
@@ -235,7 +291,8 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 if currentCafe.mrt != "" {
                     cell.rightLabel.text = currentCafe.mrt
                 } else {
-                    cell.rightLabel.text = "未提供資訊"
+                    cell.rightLabel.text = "附近沒有捷運 / 未提供資訊"
+                    cell.rightLabel.textColor = .darkGray
                 }
                 
                 return cell
@@ -252,15 +309,16 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             if webURL == nil || webURL == "" {
                 cell.linkButton.setTitle("未提供資訊", for: .normal)
+                cell.linkButton.setTitleColor(.darkGray, for: .normal)
             } else {
                 
                 let attributes: [NSAttributedString.Key: Any] = [
-                      .underlineStyle: NSUnderlineStyle.single.rawValue
-                  ]
+                    .underlineStyle: NSUnderlineStyle.single.rawValue
+                ]
                 let attributeString = NSMutableAttributedString(
-                      string: "點擊前往",
-                      attributes: attributes
-                   )
+                    string: "點擊前往",
+                    attributes: attributes
+                )
                 cell.linkButton.setAttributedTitle(attributeString, for: .normal)
             }
             

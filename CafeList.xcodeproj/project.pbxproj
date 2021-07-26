@@ -7,7 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1813542426AEF681007E337B /* MapClusterIconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1813542326AEF681007E337B /* MapClusterIconGenerator.swift */; };
 		18712D1426AAB26C0040DBED /* HyperLinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18712D1326AAB26C0040DBED /* HyperLinkCell.swift */; };
+		187218E626AD070800EB7970 /* Ubuntu-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 187218DE26AD070700EB7970 /* Ubuntu-Italic.ttf */; };
+		187218E726AD070800EB7970 /* Ubuntu-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 187218DF26AD070700EB7970 /* Ubuntu-MediumItalic.ttf */; };
+		187218E826AD070800EB7970 /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 187218E026AD070700EB7970 /* Ubuntu-Regular.ttf */; };
+		187218E926AD070800EB7970 /* Ubuntu-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 187218E126AD070700EB7970 /* Ubuntu-LightItalic.ttf */; };
+		187218EA26AD070800EB7970 /* Ubuntu-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 187218E226AD070800EB7970 /* Ubuntu-BoldItalic.ttf */; };
+		187218EB26AD070800EB7970 /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 187218E326AD070800EB7970 /* Ubuntu-Medium.ttf */; };
+		187218EC26AD070800EB7970 /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 187218E426AD070800EB7970 /* Ubuntu-Light.ttf */; };
+		187218ED26AD070800EB7970 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 187218E526AD070800EB7970 /* Ubuntu-Bold.ttf */; };
+		187218EF26ADA65200EB7970 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187218EE26ADA65200EB7970 /* GoogleService-Info.plist */; };
 		DE300076269B407B005772F0 /* paddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE300075269B407B005772F0 /* paddingLabel.swift */; };
 		DE300088269C4139005772F0 /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE300087269C4139005772F0 /* AboutVC.swift */; };
 		DE30008C269C4299005772F0 /* CafeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE30008B269C4299005772F0 /* CafeTabBarController.swift */; };
@@ -23,22 +33,6 @@
 		DE75067C267C4B63001345F2 /* CafeDetailIconTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE75067B267C4B63001345F2 /* CafeDetailIconTextCell.swift */; };
 		DE75067F267C4DD2001345F2 /* CafeDetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE75067E267C4DD2001345F2 /* CafeDetailTextCell.swift */; };
 		DE75068B267C681B001345F2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE75068A267C681B001345F2 /* MapKit.framework */; };
-		DE75069E267C77AD001345F2 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE750690267C77AC001345F2 /* Rubik-MediumItalic.ttf */; };
-		DE75069F267C77AD001345F2 /* Rubik-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE750691267C77AD001345F2 /* Rubik-SemiBoldItalic.ttf */; };
-		DE7506A0267C77AD001345F2 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE750692267C77AD001345F2 /* Rubik-Light.ttf */; };
-		DE7506A1267C77AD001345F2 /* Rubik-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE750693267C77AD001345F2 /* Rubik-ExtraBold.ttf */; };
-		DE7506A2267C77AD001345F2 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE750694267C77AD001345F2 /* Rubik-Medium.ttf */; };
-		DE7506A3267C77AD001345F2 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE750695267C77AD001345F2 /* Rubik-Bold.ttf */; };
-		DE7506A4267C77AD001345F2 /* Rubik-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE750696267C77AD001345F2 /* Rubik-LightItalic.ttf */; };
-		DE7506A5267C77AD001345F2 /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE750697267C77AD001345F2 /* Rubik-SemiBold.ttf */; };
-		DE7506A6267C77AD001345F2 /* Rubik-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE750698267C77AD001345F2 /* Rubik-BoldItalic.ttf */; };
-		DE7506A7267C77AD001345F2 /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE750699267C77AD001345F2 /* Rubik-Black.ttf */; };
-		DE7506A8267C77AD001345F2 /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE75069A267C77AD001345F2 /* Rubik-BlackItalic.ttf */; };
-		DE7506A9267C77AD001345F2 /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE75069B267C77AD001345F2 /* Rubik-Italic.ttf */; };
-		DE7506AA267C77AD001345F2 /* Rubik-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE75069C267C77AD001345F2 /* Rubik-ExtraBoldItalic.ttf */; };
-		DE7506AB267C77AD001345F2 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE75069D267C77AD001345F2 /* Rubik-Regular.ttf */; };
-		DE7506AF267C77BE001345F2 /* Rubik-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE7506AD267C77BE001345F2 /* Rubik-Italic-VariableFont_wght.ttf */; };
-		DE7506B0267C77BE001345F2 /* Rubik-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE7506AE267C77BE001345F2 /* Rubik-VariableFont_wght.ttf */; };
 		DE7A7C15269E97CF00315E98 /* CafeDetailRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7A7C14269E97CF00315E98 /* CafeDetailRatingCell.swift */; };
 		DE9CD5582686D5E000F9B4F6 /* GoogleMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9CD5572686D5E000F9B4F6 /* GoogleMapVC.swift */; };
 		DEB061E826A8150200CD9FEB /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEB061E726A8150200CD9FEB /* Onboarding.storyboard */; };
@@ -51,7 +45,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1813542326AEF681007E337B /* MapClusterIconGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapClusterIconGenerator.swift; sourceTree = "<group>"; };
 		18712D1326AAB26C0040DBED /* HyperLinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HyperLinkCell.swift; sourceTree = "<group>"; };
+		187218DE26AD070700EB7970 /* Ubuntu-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Italic.ttf"; sourceTree = "<group>"; };
+		187218DF26AD070700EB7970 /* Ubuntu-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-MediumItalic.ttf"; sourceTree = "<group>"; };
+		187218E026AD070700EB7970 /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
+		187218E126AD070700EB7970 /* Ubuntu-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-LightItalic.ttf"; sourceTree = "<group>"; };
+		187218E226AD070800EB7970 /* Ubuntu-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-BoldItalic.ttf"; sourceTree = "<group>"; };
+		187218E326AD070800EB7970 /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
+		187218E426AD070800EB7970 /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
+		187218E526AD070800EB7970 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
+		187218EE26ADA65200EB7970 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		190A83A7DB9C6752A29B74CF /* Pods-CafeList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CafeList.release.xcconfig"; path = "Target Support Files/Pods-CafeList/Pods-CafeList.release.xcconfig"; sourceTree = "<group>"; };
 		43FA61324987D2E5CA6D6D56 /* Pods-CafeList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CafeList.debug.xcconfig"; path = "Target Support Files/Pods-CafeList/Pods-CafeList.debug.xcconfig"; sourceTree = "<group>"; };
 		47788F24B60511754248565A /* Pods_CafeList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CafeList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,22 +76,6 @@
 		DE75067B267C4B63001345F2 /* CafeDetailIconTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeDetailIconTextCell.swift; sourceTree = "<group>"; };
 		DE75067E267C4DD2001345F2 /* CafeDetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeDetailTextCell.swift; sourceTree = "<group>"; };
 		DE75068A267C681B001345F2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		DE750690267C77AC001345F2 /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-MediumItalic.ttf"; sourceTree = "<group>"; };
-		DE750691267C77AD001345F2 /* Rubik-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		DE750692267C77AD001345F2 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
-		DE750693267C77AD001345F2 /* Rubik-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-ExtraBold.ttf"; sourceTree = "<group>"; };
-		DE750694267C77AD001345F2 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
-		DE750695267C77AD001345F2 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
-		DE750696267C77AD001345F2 /* Rubik-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-LightItalic.ttf"; sourceTree = "<group>"; };
-		DE750697267C77AD001345F2 /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
-		DE750698267C77AD001345F2 /* Rubik-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BoldItalic.ttf"; sourceTree = "<group>"; };
-		DE750699267C77AD001345F2 /* Rubik-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Black.ttf"; sourceTree = "<group>"; };
-		DE75069A267C77AD001345F2 /* Rubik-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-BlackItalic.ttf"; sourceTree = "<group>"; };
-		DE75069B267C77AD001345F2 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Italic.ttf"; sourceTree = "<group>"; };
-		DE75069C267C77AD001345F2 /* Rubik-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		DE75069D267C77AD001345F2 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
-		DE7506AD267C77BE001345F2 /* Rubik-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
-		DE7506AE267C77BE001345F2 /* Rubik-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		DE7A7C14269E97CF00315E98 /* CafeDetailRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeDetailRatingCell.swift; sourceTree = "<group>"; };
 		DE9CD5572686D5E000F9B4F6 /* GoogleMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapVC.swift; sourceTree = "<group>"; };
 		DEB061E726A8150200CD9FEB /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
@@ -119,6 +107,21 @@
 				DEB061ED26A8239A00CD9FEB /* WalkthroughVC.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		187218DD26AD06E700EB7970 /* UBuntu */ = {
+			isa = PBXGroup;
+			children = (
+				187218E526AD070800EB7970 /* Ubuntu-Bold.ttf */,
+				187218E226AD070800EB7970 /* Ubuntu-BoldItalic.ttf */,
+				187218DE26AD070700EB7970 /* Ubuntu-Italic.ttf */,
+				187218E426AD070800EB7970 /* Ubuntu-Light.ttf */,
+				187218E126AD070700EB7970 /* Ubuntu-LightItalic.ttf */,
+				187218E326AD070800EB7970 /* Ubuntu-Medium.ttf */,
+				187218DF26AD070700EB7970 /* Ubuntu-MediumItalic.ttf */,
+				187218E026AD070700EB7970 /* Ubuntu-Regular.ttf */,
+			);
+			path = UBuntu;
 			sourceTree = "<group>";
 		};
 		8EFEBDA4F374CCC11586D24F /* Pods */ = {
@@ -160,6 +163,7 @@
 				DE750685267C4EC9001345F2 /* Cell */,
 				DE750665267B418D001345F2 /* Assets.xcassets */,
 				DE750667267B418D001345F2 /* LaunchScreen.storyboard */,
+				187218EE26ADA65200EB7970 /* GoogleService-Info.plist */,
 				DE75066A267B418D001345F2 /* Info.plist */,
 			);
 			path = CafeList;
@@ -171,6 +175,7 @@
 				DE750676267B471B001345F2 /* CafeListVC.swift */,
 				DE750660267B418B001345F2 /* CafeDetailVC.swift */,
 				DE9CD5572686D5E000F9B4F6 /* GoogleMapVC.swift */,
+				1813542326AEF681007E337B /* MapClusterIconGenerator.swift */,
 				DE300087269C4139005772F0 /* AboutVC.swift */,
 				DE30008B269C4299005772F0 /* CafeTabBarController.swift */,
 				18712D1526AB06700040DBED /* Onboarding */,
@@ -230,22 +235,7 @@
 		DE7506B2267C77C5001345F2 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				DE7506AD267C77BE001345F2 /* Rubik-Italic-VariableFont_wght.ttf */,
-				DE7506AE267C77BE001345F2 /* Rubik-VariableFont_wght.ttf */,
-				DE750699267C77AD001345F2 /* Rubik-Black.ttf */,
-				DE75069A267C77AD001345F2 /* Rubik-BlackItalic.ttf */,
-				DE750695267C77AD001345F2 /* Rubik-Bold.ttf */,
-				DE750698267C77AD001345F2 /* Rubik-BoldItalic.ttf */,
-				DE750693267C77AD001345F2 /* Rubik-ExtraBold.ttf */,
-				DE75069C267C77AD001345F2 /* Rubik-ExtraBoldItalic.ttf */,
-				DE75069B267C77AD001345F2 /* Rubik-Italic.ttf */,
-				DE750692267C77AD001345F2 /* Rubik-Light.ttf */,
-				DE750696267C77AD001345F2 /* Rubik-LightItalic.ttf */,
-				DE750694267C77AD001345F2 /* Rubik-Medium.ttf */,
-				DE750690267C77AC001345F2 /* Rubik-MediumItalic.ttf */,
-				DE75069D267C77AD001345F2 /* Rubik-Regular.ttf */,
-				DE750697267C77AD001345F2 /* Rubik-SemiBold.ttf */,
-				DE750691267C77AD001345F2 /* Rubik-SemiBoldItalic.ttf */,
+				187218DD26AD06E700EB7970 /* UBuntu */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -263,6 +253,7 @@
 				DE750657267B418B001345F2 /* Resources */,
 				F966D694870A3AD76A2A503E /* [CP] Copy Pods Resources */,
 				2FE71406F139EF35879F1313 /* [CP] Embed Pods Frameworks */,
+				187218F126ADA82000EB7970 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -310,32 +301,44 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				187218EF26ADA65200EB7970 /* GoogleService-Info.plist in Resources */,
 				DE750669267B418D001345F2 /* LaunchScreen.storyboard in Resources */,
-				DE7506A7267C77AD001345F2 /* Rubik-Black.ttf in Resources */,
-				DE7506A6267C77AD001345F2 /* Rubik-BoldItalic.ttf in Resources */,
-				DE7506B0267C77BE001345F2 /* Rubik-VariableFont_wght.ttf in Resources */,
-				DE7506A4267C77AD001345F2 /* Rubik-LightItalic.ttf in Resources */,
-				DE7506A8267C77AD001345F2 /* Rubik-BlackItalic.ttf in Resources */,
-				DE7506A3267C77AD001345F2 /* Rubik-Bold.ttf in Resources */,
-				DE7506A0267C77AD001345F2 /* Rubik-Light.ttf in Resources */,
+				187218ED26AD070800EB7970 /* Ubuntu-Bold.ttf in Resources */,
+				187218EA26AD070800EB7970 /* Ubuntu-BoldItalic.ttf in Resources */,
+				187218EC26AD070800EB7970 /* Ubuntu-Light.ttf in Resources */,
 				DE750666267B418D001345F2 /* Assets.xcassets in Resources */,
-				DE75069F267C77AD001345F2 /* Rubik-SemiBoldItalic.ttf in Resources */,
-				DE7506AF267C77BE001345F2 /* Rubik-Italic-VariableFont_wght.ttf in Resources */,
+				187218E726AD070800EB7970 /* Ubuntu-MediumItalic.ttf in Resources */,
+				187218E626AD070800EB7970 /* Ubuntu-Italic.ttf in Resources */,
 				DEB061E826A8150200CD9FEB /* Onboarding.storyboard in Resources */,
 				DE750664267B418B001345F2 /* Main.storyboard in Resources */,
-				DE7506AA267C77AD001345F2 /* Rubik-ExtraBoldItalic.ttf in Resources */,
-				DE7506A1267C77AD001345F2 /* Rubik-ExtraBold.ttf in Resources */,
-				DE7506A9267C77AD001345F2 /* Rubik-Italic.ttf in Resources */,
-				DE7506AB267C77AD001345F2 /* Rubik-Regular.ttf in Resources */,
-				DE7506A5267C77AD001345F2 /* Rubik-SemiBold.ttf in Resources */,
-				DE75069E267C77AD001345F2 /* Rubik-MediumItalic.ttf in Resources */,
-				DE7506A2267C77AD001345F2 /* Rubik-Medium.ttf in Resources */,
+				187218E926AD070800EB7970 /* Ubuntu-LightItalic.ttf in Resources */,
+				187218E826AD070800EB7970 /* Ubuntu-Regular.ttf in Resources */,
+				187218EB26AD070800EB7970 /* Ubuntu-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		187218F126ADA82000EB7970 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		2FE71406F139EF35879F1313 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -407,6 +410,7 @@
 				DE750661267B418B001345F2 /* CafeDetailVC.swift in Sources */,
 				DE9CD5582686D5E000F9B4F6 /* GoogleMapVC.swift in Sources */,
 				DE75065D267B418B001345F2 /* AppDelegate.swift in Sources */,
+				1813542426AEF681007E337B /* MapClusterIconGenerator.swift in Sources */,
 				DE300088269C4139005772F0 /* AboutVC.swift in Sources */,
 				DE68B9EF269B33C6007A9ACA /* CafeListCell.swift in Sources */,
 				DE300076269B407B005772F0 /* paddingLabel.swift in Sources */,
@@ -574,6 +578,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 65QQ97XV3Q;
 				ENABLE_ONLY_ACTIVE_RESOURCES = YES;
 				INFOPLIST_FILE = CafeList/Info.plist;
@@ -586,7 +591,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.judytsai.CafeList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -617,7 +622,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.judytsai.CafeList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

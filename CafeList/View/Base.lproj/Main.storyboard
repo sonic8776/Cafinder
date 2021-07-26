@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZMU-uo-Zqh">
-                                <rect key="frame" x="0.0" y="319" width="375" height="299"/>
+                                <rect key="frame" x="0.0" y="371" width="375" height="247"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CafeDetailIconTextCell" id="Dyq-JM-iA3" customClass="CafeDetailIconTextCell" customModule="CafeList" customModuleProvider="target">
@@ -193,7 +193,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dY7-Th-Nvq">
-                                <rect key="frame" x="16" y="44" width="343" height="250"/>
+                                <rect key="frame" x="16" y="96" width="343" height="250"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="dWW-F6-mMA"/>
@@ -222,7 +222,7 @@
             </objects>
             <point key="canvasLocation" x="3757.5999999999999" y="-1416.3418290854574"/>
         </scene>
-        <!--Cafe List-->
+        <!--Cafinder-->
         <scene sceneID="gc6-9n-hJg">
             <objects>
                 <tableViewController id="JYk-K2-zGI" customClass="CafeListVC" customModule="CafeList" customModuleProvider="target" sceneMemberID="viewController">
@@ -242,7 +242,7 @@
                                             <rect key="frame" x="15" y="7.5" width="345" height="118"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MRTLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5D-FB-LzF" customClass="PaddingLabel" customModule="CafeList" customModuleProvider="target">
-                                                    <rect key="frame" x="257" y="87.5" width="73" height="14.5"/>
+                                                    <rect key="frame" x="257" y="81.5" width="73" height="20.5"/>
                                                     <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="73" id="ZLr-ld-qTd"/>
@@ -338,7 +338,7 @@
                             <outlet property="delegate" destination="JYk-K2-zGI" id="Rtn-vq-Efu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Cafe List" id="kJ4-nk-yNp">
+                    <navigationItem key="navigationItem" title="Cafinder" id="kJ4-nk-yNp">
                         <barButtonItem key="backBarButtonItem" title=" " id="XNP-FZ-h9T"/>
                     </navigationItem>
                     <connections>
@@ -441,14 +441,18 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHX-KW-qHz" userLabel="LogoView">
                                 <rect key="frame" x="0.0" y="44" width="375" height="120"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="About" translatesAutoresizingMaskIntoConstraints="NO" id="mo1-ZH-ojz">
-                                        <rect key="frame" x="164" y="36.5" width="47" height="47"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CAFINDER-LOGO-Light" translatesAutoresizingMaskIntoConstraints="NO" id="mo1-ZH-ojz">
+                                        <rect key="frame" x="82.5" y="22.5" width="210" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="mo1-ZH-ojz" secondAttribute="height" multiplier="14:5" id="LvG-rt-K3p"/>
+                                            <constraint firstAttribute="height" constant="75" id="SyG-aR-NWD"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="mo1-ZH-ojz" firstAttribute="centerY" secondItem="NHX-KW-qHz" secondAttribute="centerY" id="Nz8-QC-5h4"/>
-                                    <constraint firstItem="mo1-ZH-ojz" firstAttribute="centerX" secondItem="NHX-KW-qHz" secondAttribute="centerX" id="v1V-U6-7f0"/>
+                                    <constraint firstItem="mo1-ZH-ojz" firstAttribute="centerX" secondItem="NHX-KW-qHz" secondAttribute="centerX" id="eNi-hb-XM6"/>
+                                    <constraint firstItem="mo1-ZH-ojz" firstAttribute="centerY" secondItem="NHX-KW-qHz" secondAttribute="centerY" id="ghB-Zq-wfj"/>
                                     <constraint firstAttribute="height" constant="120" id="zDH-1u-jzm"/>
                                 </constraints>
                             </view>
@@ -552,15 +556,18 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="8nF-pg-Cqn">
+            <size key="intrinsicContentSize" width="135" height="23"/>
+        </designable>
         <designable name="b5D-FB-LzF">
-            <size key="intrinsicContentSize" width="59" height="14.5"/>
+            <size key="intrinsicContentSize" width="69" height="20.5"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="Lon-rZ-0w4"/>
+        <segue reference="3ED-yU-geT"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="About" width="47" height="47"/>
+        <image name="CAFINDER-LOGO-Light" width="3546" height="1281"/>
         <image name="Disclosure Only" width="21" height="36"/>
         <image name="Empty View" width="595" height="842"/>
         <image name="Star" width="48" height="46"/>

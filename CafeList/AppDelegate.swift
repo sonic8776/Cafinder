@@ -7,11 +7,13 @@
 
 import UIKit
 import GoogleMaps
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyBcfDUQYbIM9xU6NhAeXNIA33UANTfRiTs")
         // Use Custom Fonts
@@ -23,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let backButtonImage = UIImage(named: "back")
         UINavigationBar.appearance().backIndicatorImage = backButtonImage
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+        
+        FirebaseApp.configure()
         
         return true
     }

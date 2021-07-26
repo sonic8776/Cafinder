@@ -10,6 +10,18 @@ import GoogleMaps
 import GoogleMapsUtils
 import CoreLocation
 
+// Point of Interest Item which implements the GMUClusterItem protocol.
+class POIItem: NSObject, GMUClusterItem {
+  var position: CLLocationCoordinate2D
+  var name: String!
+
+  init(position: CLLocationCoordinate2D, name: String) {
+    self.position = position
+    self.name = name
+  }
+}
+
+
 class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
     @IBOutlet weak var mapUIView: UIView!
@@ -19,7 +31,7 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
     private var mapView = GMSMapView()
     private var clusterManager: GMUClusterManager!
     
-    var didShowMap = false
+    //var didShowMap = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +52,16 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         let textAttributes = [NSAttributedString.Key.foregroundColor: myColor.primaryColor]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         
+        setUpCluster()
         
+        
+    }
+    
+    func setUpCluster() {
         // Set up the cluster manager with the supplied icon generator and renderer.
+        //let iconGenerator = MapClusterIconGenerator()
         let iconGenerator = GMUDefaultClusterIconGenerator()
+        //let iconGenerator = GMUDefaultClusterIconGenerator.init(buckets: [9999], backgroundColors: [myColor.secondaryColor])
         let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
         let renderer = GMUDefaultClusterRenderer(mapView: mapView,
                                                  clusterIconGenerator: iconGenerator)
@@ -50,8 +69,6 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         
         // Register self to listen to GMSMapViewDelegate events.
         clusterManager.setMapDelegate(self)
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,7 +76,7 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         
         // Check if locationServices have been enabled
         if !CLLocationManager.locationServicesEnabled() {
-            
+            // not enabled -> Set map center to Taipei Main Station
             let coordinate = CLLocationCoordinate2D(latitude: 25.046273, longitude: 121.517498)
             
             CATransaction.begin()
@@ -72,6 +89,7 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
             
             displayAlert(title: "定位服務還沒打開", message: "請至 設定 > 隱私權 > 開啟定位服務，並重開地圖")
         } else {
+            // enabled -> startUpdating user's location
             manager.desiredAccuracy = kCLLocationAccuracyBest
             manager.activityType = .automotiveNavigation
             manager.allowsBackgroundLocationUpdates = true

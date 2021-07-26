@@ -49,7 +49,13 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
         getCafeList()
         tableView.reloadData()
         
-        // Set searchController
+        setSearchController()
+        setNavigationController()
+        
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+    }
+    
+    func setSearchController() {
         self.navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -57,9 +63,9 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
         searchController.searchBar.barTintColor = .white
         searchController.searchBar.backgroundImage = UIImage()
         searchController.searchBar.tintColor = myColor.primaryColor
-        
-        tableView.cellLayoutMarginsFollowReadableWidth = true
-        
+    }
+    
+    func setNavigationController() {
         // Set to use the large title of the navigation bar
         navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -73,10 +79,10 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
         navigationController?.hidesBarsOnSwipe = true
         
         // Use Custom Font
-        if let customFont = UIFont(name: "RubikRoman-Medium", size: 40.0) {
+        if let customFont = UIFont(name: "Ubuntu-Bold", size: 40.0) {
             navigationController?.navigationBar.largeTitleTextAttributes = [
                 NSAttributedString.Key.foregroundColor:
-                    myColor.primaryColor,
+                    myColor.primaryDarkColor,
                 NSAttributedString.Key.font: customFont
             ]
         }
