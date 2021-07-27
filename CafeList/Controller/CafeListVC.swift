@@ -69,13 +69,10 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
         // Set to use the large title of the navigation bar
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        // Configure navigation bar
         // Change title color when user swipes down and title becomes small
         let textAttributes = [NSAttributedString.Key.foregroundColor: myColor.primaryColor]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         
-        //navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.hidesBarsOnSwipe = true
         
         // Use Custom Font
