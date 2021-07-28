@@ -242,7 +242,7 @@
                                             <rect key="frame" x="15" y="7.5" width="994" height="118"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MRTLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5D-FB-LzF" customClass="PaddingLabel" customModule="CafeList" customModuleProvider="target">
-                                                    <rect key="frame" x="906" y="81.5" width="73" height="20.5"/>
+                                                    <rect key="frame" x="906" y="87.5" width="73" height="14.5"/>
                                                     <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="73" id="ZLr-ld-qTd"/>
@@ -556,11 +556,8 @@
         </scene>
     </scenes>
     <designables>
-        <designable name="8nF-pg-Cqn">
-            <size key="intrinsicContentSize" width="135" height="23"/>
-        </designable>
         <designable name="b5D-FB-LzF">
-            <size key="intrinsicContentSize" width="69" height="20.5"/>
+            <size key="intrinsicContentSize" width="59" height="14.5"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>

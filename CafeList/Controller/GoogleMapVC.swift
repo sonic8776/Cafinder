@@ -12,13 +12,13 @@ import CoreLocation
 
 // Point of Interest Item which implements the GMUClusterItem protocol.
 class POIItem: NSObject, GMUClusterItem {
-  var position: CLLocationCoordinate2D
-  var name: String!
-
-  init(position: CLLocationCoordinate2D, name: String) {
-    self.position = position
-    self.name = name
-  }
+    var position: CLLocationCoordinate2D
+    var name: String!
+    
+    init(position: CLLocationCoordinate2D, name: String) {
+        self.position = position
+        self.name = name
+    }
 }
 
 
@@ -30,12 +30,28 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
     let myColor = Colors.shared
     private var mapView = GMSMapView()
     private var clusterManager: GMUClusterManager!
+    private var observer: NSObjectProtocol?
     
     //var didShowMap = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setMapView()
+        setCluster()
+        showCafesOnMap()
+        
+        // Set navigationBar color
+        let textAttributes = [NSAttributedString.Key.foregroundColor: myColor.primaryColor]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
+        observer = NotificationCenter.default.addObserver(forName: UIScene.willEnterForegroundNotification, object: nil, queue: .main) { [unowned self] notification in
+            // do whatever you want when the app is brought back to the foreground
+            checkLocationService()
+        }
+    }
+    
+    func setMapView() {
         // Set mapView
         let defaultCenter = CLLocationCoordinate2D(latitude: -32.725757, longitude: 21.481987)
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -47,17 +63,9 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         mapView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         mapView.camera = GMSCameraPosition(target: defaultCenter, zoom: 1, bearing: 0, viewingAngle: 0)
         mapView.delegate = self
-        
-        // Set navigationBar color
-        let textAttributes = [NSAttributedString.Key.foregroundColor: myColor.primaryColor]
-        navigationController?.navigationBar.titleTextAttributes = textAttributes
-        
-        setUpCluster()
-        
-        
     }
     
-    func setUpCluster() {
+    func setCluster() {
         // Set up the cluster manager with the supplied icon generator and renderer.
         //let iconGenerator = MapClusterIconGenerator()
         let iconGenerator = GMUDefaultClusterIconGenerator()
@@ -73,7 +81,11 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        checkLocationService()
+
+    }
+    
+    func checkLocationService() {
         // Check if locationServices have been enabled
         if !CLLocationManager.locationServicesEnabled() {
             // not enabled -> Set map center to Taipei Main Station
@@ -85,24 +97,18 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
             mapView.animate(toZoom: 18)
             CATransaction.commit()
             
-            showCafesOnMap()
-            
             displayAlert(title: "定位服務還沒打開", message: "請至 設定 > 隱私權 > 開啟定位服務，並重開地圖")
         } else {
             // enabled -> startUpdating user's location
             manager.desiredAccuracy = kCLLocationAccuracyBest
             manager.activityType = .automotiveNavigation
-            manager.allowsBackgroundLocationUpdates = true
             manager.delegate = self
             manager.startUpdatingLocation()
             manager.startUpdatingHeading()
             
             mapView.settings.myLocationButton = true
             mapView.isMyLocationEnabled = true
-            
-            showCafesOnMap()
         }
-        
     }
     
     func displayAlert(title: String, message: String) {
@@ -217,5 +223,10 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         
         manager.stopUpdatingLocation()
         
+    }
+    deinit {
+            if let observer = observer {
+                NotificationCenter.default.removeObserver(observer)
+            }
     }
 }

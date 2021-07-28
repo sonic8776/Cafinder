@@ -7,7 +7,17 @@
 
 import Foundation
 
-class Cafe: Codable {
+protocol Reorderable {
+    associatedtype OrderElement: Equatable
+    var orderElement: OrderElement { get }
+}
+
+class Cafe: Codable, Equatable {
+    
+    static func == (lhs: Cafe, rhs: Cafe) -> Bool {
+        return lhs === rhs
+    }
+    
     var name: String
     var address: String
     var wifi: Double
@@ -62,4 +72,9 @@ class Cafe: Codable {
         self.mrt = cafeMrt
         self.open_time = cafeOpen_time
     }
+}
+
+extension Cafe: Reorderable {
+    typealias OrderElement = String
+    var orderElement: OrderElement { address }
 }
