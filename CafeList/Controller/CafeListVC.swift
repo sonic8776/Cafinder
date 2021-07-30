@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import UserNotifications
 
 class CafeListVC: UITableViewController, UISearchResultsUpdating {
     
@@ -14,7 +15,7 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
     
     let locationManager = CLLocationManager()
     let myColor = Colors.shared
-    let cityOrdering = ["台北市","新北市","桃園市","台中市","台南市","高雄市"]
+    //let cityOrdering = ["台北市","新北市","桃園市","台中市","台南市","高雄市"]
     
     var searchController = UISearchController(searchResultsController: nil)
     var searchResults: [Cafe] = []
@@ -108,10 +109,59 @@ class CafeListVC: UITableViewController, UISearchResultsUpdating {
                     
                     //CafeManager.cafeList = CafeManager.cafeList.reorder(by: <#T##[Cafe.OrderElement]#>)
                     self.tableView.reloadData()
+                    self.prepareNotification()
                 }
             }
         }
         task.resume()
+    }
+    
+    func createCalendarNotification() {
+        // Notify user to use app every Thursday 20:00
+        
+        // Choose a cafe randomly
+        let randomNum = Int.random(in: 0..<CafeManager.cafeList.count)
+        let suggestedCafe = CafeManager.cafeList[randomNum]
+        
+        // Create user notification
+        let content = UNMutableNotificationContent()
+        content.title = "週末快到了！要不要去咖啡廳？"
+        content.body = "找間咖啡廳放鬆一下，慰勞自己一週的辛勞吧！"
+        content.sound = UNNotificationSound.default
+        
+        // Configure the recurring date.
+        var dateComponents = DateComponents()
+        dateComponents.calendar = Calendar.current
+
+        print("timezone: \(Calendar.current.timeZone)") // Asia/Taipei
+        print("first weekday: \(Calendar.current.firstWeekday)") // Monday
+        
+        dateComponents.weekday = 5  // Thursday
+        dateComponents.hour = 20    // 20:00
+//        dateComponents.weekday = 6  // for test
+//        dateComponents.hour = 9    // for test
+//        dateComponents.minute = 45 // for test
+           
+        // Create the trigger as a repeating event.
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let request = UNNotificationRequest(identifier: "calendar", content: content, trigger: trigger)
+        
+        // Schedule notification
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error adding request to UNUserNotificationCenter: \(error)")
+            }
+        }
+        print("Successfully added Calendar notification.")
+    }
+
+    
+    func prepareNotification() {
+        if CafeManager.cafeList.count <= 0 {
+            return
+        }
+        createCalendarNotification()
     }
     
     // MARK: - UISearchController methods

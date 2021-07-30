@@ -15,11 +15,17 @@ class CafeDetailTextCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var rightLabel: UILabel!
+    @IBOutlet weak var rightLabel: UILabel! {
+        didSet {
+            descriptionLabel.numberOfLines = 0
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        sizeToFit()
+        layoutIfNeeded()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

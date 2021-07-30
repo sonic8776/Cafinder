@@ -28,6 +28,7 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
     
     let manager = CLLocationManager()
     let myColor = Colors.shared
+    var userLocation: CLLocation?
     private var mapView = GMSMapView()
     private var clusterManager: GMUClusterManager!
     private var observer: NSObjectProtocol?
@@ -81,8 +82,8 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         checkLocationService()
-
     }
     
     func checkLocationService() {
@@ -108,6 +109,37 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
             
             mapView.settings.myLocationButton = true
             mapView.isMyLocationEnabled = true
+        }
+    }
+    
+    func creatLocationNotification() {
+        // To Be Done: suggest a nearby cafe to user
+        // Choose a cafe randomly
+        let randomNum = Int.random(in: 0..<CafeManager.cafeList.count)
+        let suggestedCafe = CafeManager.cafeList[randomNum]
+        
+        // Create user notification
+        let content = UNMutableNotificationContent()
+        content.title = "推薦咖啡廳"
+        content.body = "推薦你看看 \(suggestedCafe.name)，位於 \(suggestedCafe.address)，週末去喝杯咖啡吧！"
+        content.sound = UNNotificationSound.default
+        
+        guard let userCoordinate = userLocation?.coordinate else {
+            print("Can't get userLocation.coordinate.")
+            return
+        }
+        
+        let center = userCoordinate
+        let region = CLCircularRegion(center: center, radius: 2000.0, identifier: "Headquarters")
+        region.notifyOnEntry = true
+        region.notifyOnExit = false
+        let trigger = UNLocationNotificationTrigger(region: region, repeats: false)
+        let request = UNNotificationRequest(identifier: "location", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error adding request to UNUserNotificationCenter: \(error)")
+            }
         }
     }
     
@@ -205,6 +237,7 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         // Show the user's current location with blue pot.
         guard let currentLocation = locations.first else { return }
         print("Current Location: (\(currentLocation.coordinate.latitude), \(currentLocation.coordinate.longitude))")
+        userLocation = currentLocation
         
         let coordinate = currentLocation.coordinate
         
@@ -225,8 +258,8 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         
     }
     deinit {
-            if let observer = observer {
-                NotificationCenter.default.removeObserver(observer)
-            }
+        if let observer = observer {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
 }

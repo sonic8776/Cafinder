@@ -43,6 +43,10 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         tableView.separatorStyle = .none
         tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
+        
         // 導覽列變透明
         //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         //        navigationController?.navigationBar.shadowImage = UIImage()
@@ -113,6 +117,14 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 11
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func setTextCell(description: String, indexPath: IndexPath) -> CafeDetailTextCell {
@@ -236,6 +248,7 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CafeDetailTextCell.self), for: indexPath) as! CafeDetailTextCell
             cell.descriptionLabel.textColor = myColor.primaryColor
             cell.rightLabel.textColor = myColor.primaryColor
+            
             
             switch indexPath.row {
             

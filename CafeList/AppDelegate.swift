@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMaps
 import Firebase
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
         
         FirebaseApp.configure()
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+            if granted {
+                print("Allowed local notification.")
+            } else {
+                print("Declined local notification.")
+            }
+        }
         
         return true
     }
