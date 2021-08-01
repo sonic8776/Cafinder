@@ -8,18 +8,43 @@
 import UIKit
 import GoogleMaps
 import CoreLocation
+import CoreData
 
 class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var currentCafe : Cafe!
+    var currentCafe: Cafe!
     var mapView = GMSMapView()
     let manager = CLLocationManager()
     let myColor = Colors.shared
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var isFavorite: Bool! {
+        
+        let request: NSFetchRequest<CafeItem> = CafeItem.fetchRequest()
+        request.predicate = NSPredicate(format: "id MATCHES %@", currentCafe.id)
+        request.fetchLimit = 1
+        
+        do {
+            let count = try context.count(for: request)
+            if(count == 0){
+                // no matching object
+                return false
+            }
+            else{
+                // at least one matching object exists
+                return true
+            }
+        }
+        catch {
+            print("Could not fetch \(error)")
+        }
+        return nil
+    }
     
     var webURL: String?
     
     @IBOutlet var tableView : UITableView!
     @IBOutlet weak var mapUIView: UIView!
+    @IBOutlet weak var favoriteBtn: UIBarButtonItem!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -28,6 +53,9 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         navigationController?.setNavigationBarHidden(false, animated: true)
         
         webURL = currentCafe.weburl
+        
+        currentCafe.isFavorite = isFavorite
+        favoriteBtn.image = currentCafe.isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
     }
     
     override func viewDidLoad() {
@@ -46,6 +74,8 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
+        
+        favoriteBtn.tintColor = myColor.mrtRed
         
         // 導覽列變透明
         //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -107,6 +137,76 @@ class CafeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         controller.addAction(okAction)
         controller.view.tintColor = myColor.primaryColor
         present(controller, animated: true, completion: nil)
+    }
+    
+    @IBAction func favoriteBtnPressed(_ sender: UIBarButtonItem) {
+        
+        let favoriteCafe = CafeItem(context: context)
+        favoriteCafe.id = currentCafe.id
+        favoriteCafe.name = currentCafe.name
+        favoriteCafe.city = currentCafe.city
+        favoriteCafe.wifi = currentCafe.wifi
+        favoriteCafe.seat = currentCafe.seat
+        favoriteCafe.quiet = currentCafe.quiet
+        favoriteCafe.tasty = currentCafe.tasty
+        favoriteCafe.cheap = currentCafe.cheap
+        favoriteCafe.music = currentCafe.music
+        favoriteCafe.url = currentCafe.weburl
+        favoriteCafe.address = currentCafe.address
+        favoriteCafe.latitude = currentCafe.latitude
+        favoriteCafe.longitude = currentCafe.longitude
+        favoriteCafe.limited_time = currentCafe.limited_time
+        favoriteCafe.socket = currentCafe.socket
+        favoriteCafe.standing_desk = currentCafe.socket
+        favoriteCafe.mrt = currentCafe.mrt
+        favoriteCafe.open_time = currentCafe.open_time
+        
+        if !currentCafe.isFavorite {
+            // Save to db and add to favorite
+            saveCafeItems(isFavorite: true)
+            
+        } else {
+            // Delete from db and remove from favorite
+            
+            // 1) Check if this object exists in DB by id
+            let request: NSFetchRequest<CafeItem> = CafeItem.fetchRequest()
+            request.predicate = NSPredicate(format: "id MATCHES %@", currentCafe.id)
+            
+            do {
+                let count = try context.count(for: request)
+               
+                if(count == 0){
+                    // no matching object
+                    return
+                }
+                else {
+                    // at least one matching object exists
+                    // 2) Delete all matched objects
+                    if let result = try? context.fetch(request) {
+                        for object in result {
+                            context.delete(object)
+                        }
+                    }
+                }
+            }
+            catch {
+                print("Could not fetch \(error)")
+            }
+            // 3) Save to DB
+            saveCafeItems(isFavorite: false)
+
+            print("Successfully deleted data from DB.")
+        }
+    }
+    
+    func saveCafeItems(isFavorite: Bool) {
+        do {
+            try context.save()
+            print("Successfully saved data to DB.")
+            favoriteBtn.image = isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+        } catch {
+            print("Error saving context: \(error)")
+        }
     }
     
     // MARK: - UITableView Methods.

@@ -18,7 +18,9 @@ class Cafe: Codable, Equatable {
         return lhs === rhs
     }
     
+    var id: String
     var name: String
+    var city: String
     var address: String
     var wifi: Double
     var seat: Double
@@ -34,9 +36,12 @@ class Cafe: Codable, Equatable {
     var standing_desk : String // 可能為空字串
     var mrt : String // 可能為空字串
     var open_time : String // 可能為空字串
+    var isFavorite: Bool!
     
     init?(json: [String: Any]){
-        guard let cafename = json["name"] as? String,
+        guard let cafeid = json["id"] as? String,
+              let cafename = json["name"] as? String,
+              let cafecity = json["city"] as? String,
               let cafeaddress = json["address"] as? String,
               let cafewifi = json["wifi"] as? Double,
               let cafeseat = json["seat"] as? Double,
@@ -55,7 +60,9 @@ class Cafe: Codable, Equatable {
         else{
             return nil
         }
+        self.id = cafeid
         self.name = cafename
+        self.city = cafecity
         self.address = cafeaddress
         self.wifi = cafewifi
         self.seat = cafeseat
@@ -71,6 +78,7 @@ class Cafe: Codable, Equatable {
         self.standing_desk = cafeStanding_desk
         self.mrt = cafeMrt
         self.open_time = cafeOpen_time
+        self.isFavorite = false
     }
 }
 
