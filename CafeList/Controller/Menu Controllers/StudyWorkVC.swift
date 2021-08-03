@@ -7,6 +7,7 @@
 
 import UIKit
 import SideMenu
+import SwiftMessages
 
 class StudyWorkVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -30,6 +31,8 @@ class StudyWorkVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         setTableViewBackground()
         
         self.tabBarItem = UITabBarItem(title: "探索", image: UIImage(systemName: "magnifyingglass"), selectedImage: nil)
+        
+        showInfoMessage()
     }
     
     func setSearchController() {
@@ -61,7 +64,6 @@ class StudyWorkVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 NSAttributedString.Key.font: customFont
             ]
         }
-        
     }
     
     @IBAction func didTapMenuBtn(_ sender: UIBarButtonItem) {
@@ -89,12 +91,28 @@ class StudyWorkVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         cafeArray = CafeManager.cafeList.filter { (cafe) -> Bool in
             
             let isMatch = cafe.socket == "yes" &&
+                cafe.wifi >= 4.0 &&
                 cafe.quiet >= 4.0 &&
                 cafe.limited_time == "no"
             return isMatch
         }
     }
     
+    func showInfoMessage() {
+        let view = MessageView.viewFromNib(layout: .cardView)
+        let iconText = "😇"
+        
+        view.configureContent(title: "為您推薦適合的店家", body: "WiFi 穩定 & 安靜程度 > 4 分，插座多且不限時", iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "OK") { _ in
+            SwiftMessages.hide()
+        }
+        view.configureTheme(backgroundColor: myColor.secondaryColor, foregroundColor: myColor.primaryDarkColor, iconImage: nil, iconText: iconText)
+        
+        var config = SwiftMessages.defaultConfig
+        config.presentationStyle = .center
+        config.dimMode = .blur(style: .dark, alpha: 1.0, interactive: true)
+        config.duration = .seconds(seconds: 5)
+        SwiftMessages.show(config: config, view: view)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "studyWorkDetail" {

@@ -11,5 +11,6 @@ target 'CafeList' do
   pod 'Google-Maps-iOS-Utils'
   pod 'Firebase/Crashlytics'
   pod 'SideMenu'
+  pod 'SwiftMessages'
 
 end

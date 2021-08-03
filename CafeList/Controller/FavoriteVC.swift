@@ -23,8 +23,7 @@ class FavoriteVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        //tabBarController?.delegate = self
+
         loadItems()
         tableView.reloadData()
         setNavigationController()
@@ -39,6 +38,15 @@ class FavoriteVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tableView.cellLayoutMarginsFollowReadableWidth = true
         
         setTableViewBackground()
+        
+        // If the user hasn't subscribed local timer notification, subcribe it.
+        // Return if the user has subscribed.
+        if UserDefaults.standard.bool(forKey: "hasSubcribedTimerNotification") {
+            return
+        } else {
+            prepareNotification()
+            UserDefaults.standard.set(true, forKey: "hasSubcribedTimerNotification")
+        }
     }
     
     func setSearchController() {
@@ -50,12 +58,6 @@ class FavoriteVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         searchController.searchBar.backgroundImage = UIImage()
         searchController.searchBar.tintColor = myColor.primaryColor
     }
-//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-//        let tabBarIndex = tabBarController.selectedIndex
-//        if tabBarIndex == 2 {
-//            self.viewWillAppear(true)
-//        }
-//    }
     
     func setNavigationController() {
         // Set to use the large title of the navigation bar
@@ -120,7 +122,7 @@ class FavoriteVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
         // prepareNotification()
     }
-    // MARK: -  Local Notification
+    // MARK: -  Local Timer Notification
     
     func createTimerNotification() {
         

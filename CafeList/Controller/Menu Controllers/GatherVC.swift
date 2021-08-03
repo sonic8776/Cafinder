@@ -7,6 +7,7 @@
 
 import UIKit
 import SideMenu
+import SwiftMessages
 
 class GatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -30,6 +31,8 @@ class GatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         setTableViewBackground()
         
         self.tabBarItem = UITabBarItem(title: "探索", image: UIImage(systemName: "magnifyingglass"), selectedImage: nil)
+        
+        showInfoMessage()
     }
     
     func setSearchController() {
@@ -93,6 +96,23 @@ class GatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 $0.limited_time == "no"
             
         }
+    }
+    
+    func showInfoMessage() {
+        
+        let view = MessageView.viewFromNib(layout: .cardView)
+        let iconText = "😇"
+        
+        view.configureContent(title: "為您推薦適合的店家", body: "食物美味、通常有位至少 4 顆星，且不限時", iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "OK") { _ in
+            SwiftMessages.hide()
+        }
+        view.configureTheme(backgroundColor: myColor.secondaryColor, foregroundColor: myColor.primaryDarkColor, iconImage: nil, iconText: iconText)
+        
+        var config = SwiftMessages.defaultConfig
+        config.presentationStyle = .center
+        config.dimMode = .blur(style: .dark, alpha: 1.0, interactive: true)
+        config.duration = .seconds(seconds: 5)
+        SwiftMessages.show(config: config, view: view)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
