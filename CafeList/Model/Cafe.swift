@@ -7,11 +7,6 @@
 
 import Foundation
 
-protocol Reorderable {
-    associatedtype OrderElement: Equatable
-    var orderElement: OrderElement { get }
-}
-
 class Cafe: Codable, Equatable {
     
     static func == (lhs: Cafe, rhs: Cafe) -> Bool {
@@ -38,7 +33,29 @@ class Cafe: Codable, Equatable {
     var open_time : String // 可能為空字串
     var isFavorite: Bool!
     
-    init?(json: [String: Any]){
+    init(cafeid: String, cafename: String, cafecity: String, cafeaddress: String, cafewifi: Double, cafeseat: Double, cafequiet: Double, cafetasty: Double, cafecheap: Double, cafemusic: Double, cafeweburl: String, cafeLatitude: String, cafeLongitude: String, cafeLimited_time: String, cafeSocket: String, cafeStanding_desk: String, cafeMrt: String, cafeOpen_time: String) {
+        self.id = cafeid
+        self.name = cafename
+        self.city = cafecity
+        self.address = cafeaddress
+        self.wifi = cafewifi
+        self.seat = cafeseat
+        self.quiet = cafequiet
+        self.tasty = cafetasty
+        self.cheap = cafecheap
+        self.music = cafemusic
+        self.weburl = cafeweburl
+        self.latitude = cafeLatitude
+        self.longitude = cafeLongitude
+        self.limited_time = cafeLimited_time
+        self.socket = cafeSocket
+        self.standing_desk = cafeStanding_desk
+        self.mrt = cafeMrt
+        self.open_time = cafeOpen_time
+        self.isFavorite = false
+    }
+    
+    init?(json: [String: Any]) {
         guard let cafeid = json["id"] as? String,
               let cafename = json["name"] as? String,
               let cafecity = json["city"] as? String,
@@ -57,7 +74,7 @@ class Cafe: Codable, Equatable {
               let cafeStanding_desk = json["standing_desk"] as? String,
               let cafeMrt = json["mrt"] as? String,
               let cafeOpen_time = json["open_time"] as? String
-        else{
+        else {
             return nil
         }
         self.id = cafeid
@@ -80,9 +97,4 @@ class Cafe: Codable, Equatable {
         self.open_time = cafeOpen_time
         self.isFavorite = false
     }
-}
-
-extension Cafe: Reorderable {
-    typealias OrderElement = String
-    var orderElement: OrderElement { address }
 }

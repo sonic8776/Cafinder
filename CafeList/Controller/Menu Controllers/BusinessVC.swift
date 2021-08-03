@@ -1,48 +1,39 @@
 //
-//  FavoriteVC.swift
+//  StudyWorkVC.swift
 //  CafeList
 //
-//  Created by Judy Tsai on 2021/7/30.
+//  Created by Judy Tsai on 2021/8/1.
 //
 
 import UIKit
-import CoreData
+import SideMenu
 
-class FavoriteVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BusinessVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    private var cafeArray: [Cafe]!
+    let myColor = Colors.shared
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var footerLabel: UILabel! // Strong!
-    @IBOutlet var footerView: UIView! // String!
-    
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let myColor = Colors.shared
-    var favoriteList = [CafeItem]()
     
     var searchController = UISearchController(searchResultsController: nil)
-    var searchResults: [CafeItem] = []
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //tabBarController?.delegate = self
-        loadItems()
-        tableView.reloadData()
-        setNavigationController()
-        setSearchController()
-    }
+    var searchResults: [Cafe] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
         tableView.dataSource = self
-        tableView.cellLayoutMarginsFollowReadableWidth = true
+        tableView.delegate = self
         
+        filterCafes()
+        setSearchController()
+        setNavigationController()
         setTableViewBackground()
+        
+        self.tabBarItem = UITabBarItem(title: "探索", image: UIImage(systemName: "magnifyingglass"), selectedImage: nil)
     }
     
     func setSearchController() {
-        navigationItem.searchController = searchController
+        self.navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "輸入地區 / 捷運站名搜尋咖啡廳..."
@@ -50,28 +41,16 @@ class FavoriteVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         searchController.searchBar.backgroundImage = UIImage()
         searchController.searchBar.tintColor = myColor.primaryColor
     }
-//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-//        let tabBarIndex = tabBarController.selectedIndex
-//        if tabBarIndex == 2 {
-//            self.viewWillAppear(true)
-//        }
-//    }
     
     func setNavigationController() {
         // Set to use the large title of the navigation bar
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .automatic
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.navigationController?.navigationBar.sizeToFit()
-        }
         
         // Change title color when user swipes down and title becomes small
         let textAttributes = [NSAttributedString.Key.foregroundColor: myColor.primaryColor]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         
         navigationController?.hidesBarsOnSwipe = false
-        navigationItem.hidesSearchBarWhenScrolling = false
         
         // Use Custom Font
         if let customFont = UIFont(name: "Ubuntu-Bold", size: 40.0) {
@@ -81,151 +60,68 @@ class FavoriteVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 NSAttributedString.Key.font: customFont
             ]
         }
+        
     }
     
     func setTableViewBackground() {
         // Light grey background & footer view
-        tableView.backgroundView?.backgroundColor = myColor.lightGrey
-        tableView.backgroundColor = myColor.lightGrey
-        tableView.separatorStyle = .none
+        self.tableView.backgroundView?.backgroundColor = myColor.lightGrey
+        self.tableView.backgroundColor = myColor.lightGrey
+        self.tableView.separatorStyle = .none
 
+        // Set Top Padding = 10
+        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        
         let footerView = UIView()
         footerView.backgroundColor = myColor.lightGrey
-        tableView.tableFooterView = footerView
+        self.tableView.tableFooterView = footerView
+    }
+    
+    @IBAction func didTapMenuBtn(_ sender: UIBarButtonItem) {
         
-        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
-    }
-    
-    func setFooterView() {
-        footerLabel.text = "目前清單是空的，前往咖啡廳詳細資訊頁 > 點擊右上角愛心，即可新增 / 移除最愛的咖啡廳！"
-        footerLabel.textColor = myColor.primaryColor
-        footerLabel.setLineHeight(lineHeight: 24)
-    }
-    
-    private func toggleFooterView() { // haven't been used yet
-        if tableView.tableFooterView == nil {
-            tableView.tableFooterView = footerView
-        } else {
-            tableView.tableFooterView = nil
+        if let tabVC = self.tabBarController as? CafeTabBarController {
+            present(tabVC.sideMenu, animated: true, completion: nil)
         }
     }
     
-    func loadItems() {
-        let request: NSFetchRequest<CafeItem> = CafeItem.fetchRequest()
-        do {
-           favoriteList = try context.fetch(request)
-            tableView.reloadData()
-        } catch {
-            print("Error fetching data from context: \(error)")
+    func filterCafes() {
+        
+        cafeArray = CafeManager.cafeList.filter {
+            
+            $0.wifi >= 4.0 &&
+                $0.music >= 4.0 &&
+                $0.socket != "no"
+            
         }
-        // prepareNotification()
-    }
-    // MARK: -  Local Notification
-    
-    func createTimerNotification() {
-        
-        // Suggest a random cafe from favorite list
-        let randomNum = Int.random(in: 0..<favoriteList.count)
-        let suggestedCafe = favoriteList[randomNum]
-        
-        // Create user notification
-        let content = UNMutableNotificationContent()
-        content.title = "專屬你的咖啡廳推薦"
-        content.body = "上次去過的【\(suggestedCafe.name!)】感覺還不錯，要不要再去一次？"
-        content.sound = UNNotificationSound.default
-        
-        // Create the trigger as a repeating event.
-        let threeWeeks = (24 * 60 * 60) * 7 * 3 // 1814400 seconds
-        // print(threeWeeks)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(threeWeeks), repeats: true)
-        let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
-        
-        // Schedule notification
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Error adding request to UNUserNotificationCenter: \(error)")
-            }
-        }
-        print("Successfully added Timer notification.")
     }
     
-    func prepareNotification() {
-        if favoriteList.count <= 0 {
-            return
-        }
-        createTimerNotification()
-    }
-    
-    
-     // MARK: - Navigation
-     
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showFavoriteDetail" {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "businessDetail" {
             if let cafeDetailVC = segue.destination as? CafeDetailVC,
                let row = tableView.indexPathForSelectedRow?.row {
-                
-                let favoriteCafe = favoriteList[row]
-                
-                // Deal with String? attributes (automatically become optional by Core Data)
-                guard let id = favoriteCafe.id,
-                      let name = favoriteCafe.name,
-                      let city = favoriteCafe.city,
-                      let url = favoriteCafe.url,
-                      let address = favoriteCafe.address,
-                      let latitude = favoriteCafe.latitude,
-                      let longitude = favoriteCafe.longitude,
-                      let limited_time = favoriteCafe.limited_time,
-                      let socket = favoriteCafe.socket,
-                      let standing_desk = favoriteCafe.standing_desk,
-                      let mrt = favoriteCafe.mrt,
-                      let open_time = favoriteCafe.open_time
-                else { return }
-                
-                let wifi = favoriteCafe.wifi
-                let quiet = favoriteCafe.quiet
-                let music = favoriteCafe.music
-                let tasty = favoriteCafe.tasty
-                let cheap = favoriteCafe.cheap
-                let seat = favoriteCafe.seat
-                
-                let currentCafe = Cafe(cafeid: id, cafename: name, cafecity: city, cafeaddress: address, cafewifi: wifi, cafeseat: seat, cafequiet: quiet, cafetasty: tasty, cafecheap: cheap, cafemusic: music, cafeweburl: url, cafeLatitude: latitude, cafeLongitude: longitude, cafeLimited_time: limited_time, cafeSocket: socket, cafeStanding_desk: standing_desk, cafeMrt: mrt, cafeOpen_time: open_time)
-                
-                cafeDetailVC.currentCafe = currentCafe
+                cafeDetailVC.currentCafe = (searchController.isActive) ? searchResults[row] :  cafeArray[row]
             }
         }
-     }
-     
-    // MARK: -  TableView methods
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searchController.isActive {
             return searchResults.count
         } else {
-            return favoriteList.count
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        if favoriteList.count != 0 {
-            // Favorite item exists -> Hide FooterView
-            return nil
-        } else {
-            // No favorite item -> Show FooterView
-            setFooterView()
-            return footerView
+            return cafeArray.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteCell") as! CafeListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "businessCell", for: indexPath) as! CafeListCell
+        
         // 判斷是從搜尋結果或原本陣列取得咖啡廳
-        let cafe = (searchController.isActive) ? searchResults[indexPath.row] : favoriteList[indexPath.row]
+        let cafe = (searchController.isActive) ? searchResults[indexPath.row] : cafeArray[indexPath.row]
         
         cell.nameLabel.text = cafe.name
         cell.locationLabel.text = cafe.address
@@ -266,7 +162,7 @@ class FavoriteVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         cell.mrtLabel.clipsToBounds = true
         cell.mrtLabel.layer.cornerRadius = 5
         
-        guard let label = cafe.mrt else { return cell }
+        let label = cafe.mrt
         
         // MARK: - Kaohsiung - Red line
         if label.contains("小港") {
@@ -916,6 +812,7 @@ class FavoriteVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             cell.mrtLabel.backgroundColor = nil
         }
         
+        
         return cell
     }
     
@@ -923,15 +820,15 @@ class FavoriteVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 // MARK: - UISearchController methods
 
-extension FavoriteVC: UISearchResultsUpdating {
+extension BusinessVC: UISearchResultsUpdating {
     
     func filterContent(for searchText: String) {
         if searchController.isActive {
-            searchResults = favoriteList.filter { (cafe) -> Bool in
+            searchResults = cafeArray.filter { (cafe) -> Bool in
                 let name = cafe.name
                 let address = cafe.address
                 let mrt = cafe.mrt
-                let isMatch = name!.localizedCaseInsensitiveContains(searchText) || address!.localizedCaseInsensitiveContains(searchText) || mrt!.localizedCaseInsensitiveContains(searchText)
+                let isMatch = name.localizedCaseInsensitiveContains(searchText) || address.localizedCaseInsensitiveContains(searchText) || mrt.localizedCaseInsensitiveContains(searchText)
                 return isMatch
             }
         } else {

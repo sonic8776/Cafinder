@@ -10,5 +10,6 @@ target 'CafeList' do
   pod 'Cosmos'
   pod 'Google-Maps-iOS-Utils'
   pod 'Firebase/Crashlytics'
+  pod 'SideMenu'
 
 end

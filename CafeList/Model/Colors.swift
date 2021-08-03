@@ -3,7 +3,7 @@ import UIKit
 struct Colors {
     
     static let shared = Colors()
-    
+    // Theme colors
     let primaryColor = UIColor(red: 0.43, green: 0.30, blue: 0.25, alpha: 1.0);
     let primaryLightColor = UIColor(red: 0.61, green: 0.47, blue: 0.42, alpha: 1.0);
     let primaryDarkColor = UIColor(red: 0.25, green: 0.14, blue: 0.10, alpha: 1.0);
@@ -23,6 +23,9 @@ struct Colors {
     
     // For Rating Star
     let emptyStar = UIColor(hexString: "#DADADA")
+    
+    // For talbeView footer
+    let lightGrey = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
 }
 
 extension UIColor {

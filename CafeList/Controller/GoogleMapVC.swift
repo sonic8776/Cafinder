@@ -59,7 +59,6 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         self.view.addSubview(mapView)
         mapView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         mapView.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor).isActive = true
-        mapView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         mapView.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         mapView.camera = GMSCameraPosition(target: defaultCenter, zoom: 1, bearing: 0, viewingAngle: 0)
@@ -164,6 +163,7 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
     func showCafesOnMap(){
         
         let icon = GMSMarker.markerImage(with: .brown)
+        var markerArray = [GMSMarker]()
         for data in CafeManager.cafeList {
             
             if let lat = CLLocationDegrees(data.latitude),
@@ -174,19 +174,18 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
                 if CLLocationCoordinate2DIsValid(location) {
                     
                     let marker = GMSMarker(position: location)
-                    marker.position = location
-                    marker.appearAnimation = .pop
+
                     marker.title = data.name
                     marker.snippet = data.address
                     marker.icon = icon
-                    marker.map = mapView
-                    clusterManager.add(marker)
+                    markerArray.append(marker)
                     
                 } else {
                     print("Invalid location: \(data.name), (\(location.latitude), \(location.longitude))")
                 }
             }
         }
+        clusterManager.add(markerArray)
         clusterManager.cluster()
     }
     
@@ -203,9 +202,9 @@ class GoogleMapVC: UIViewController, CLLocationManagerDelegate, GMSMapViewDelega
         
         //        let bounds = GMSCoordinateBounds(coordinate: self.userLocation!.coordinate, coordinate: marker.position)
         //        self.mapView.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds, withPadding: 120.0))
-        self.mapView.camera = GMSCameraPosition.camera(withTarget: marker.position, zoom: 18.0)
-        let update = GMSCameraUpdate.zoom(by: 1)
-        mapView.animate(with: update)
+//        self.mapView.camera = GMSCameraPosition.camera(withTarget: marker.position, zoom: 18.0)
+//        let update = GMSCameraUpdate.zoom(by: 1)
+//        mapView.animate(with: update)
         
         print("Did tap a normal marker")
         return false

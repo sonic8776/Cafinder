@@ -1,60 +1,35 @@
 //
-//  CafeListViewController.swift
+//  StudyWorkVC.swift
 //  CafeList
 //
-//  Created by Judy Tsai on 2021/6/17.
+//  Created by Judy Tsai on 2021/8/1.
 //
 
 import UIKit
-import CoreLocation
-import UserNotifications
+import SideMenu
 
-class CafeListVC: UITableViewController {
+class GatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet var emptyCafeView: UIView!
-    
-    let locationManager = CLLocationManager()
+    private var cafeArray: [Cafe]!
     let myColor = Colors.shared
-    //let cityOrdering = ["台北市","新北市","桃園市","台中市","台南市","高雄市"]
+    
+    @IBOutlet weak var tableView: UITableView!
     
     var searchController = UISearchController(searchResultsController: nil)
     var searchResults: [Cafe] = []
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.hidesBarsOnSwipe = true
-        navigationItem.hidesSearchBarWhenScrolling = false
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
-            return
-        }
-        
-        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-        if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughVC {
-            walkthroughViewController.modalPresentationStyle = .fullScreen
-            present(walkthroughViewController, animated: true, completion: nil)
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Prepare for empty view
-        tableView.backgroundView = emptyCafeView
-        tableView.backgroundView?.isHidden = true
+        tableView.dataSource = self
+        tableView.delegate = self
         
-        getCafeList()
-        tableView.reloadData()
-        
+        filterCafes()
         setSearchController()
         setNavigationController()
+        setTableViewBackground()
         
-        tableView.cellLayoutMarginsFollowReadableWidth = true
+        self.tabBarItem = UITabBarItem(title: "探索", image: UIImage(systemName: "magnifyingglass"), selectedImage: nil)
     }
     
     func setSearchController() {
@@ -75,7 +50,7 @@ class CafeListVC: UITableViewController {
         let textAttributes = [NSAttributedString.Key.foregroundColor: myColor.primaryColor]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         
-        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.hidesBarsOnSwipe = false
         
         // Use Custom Font
         if let customFont = UIFont(name: "Ubuntu-Bold", size: 40.0) {
@@ -85,122 +60,69 @@ class CafeListVC: UITableViewController {
                 NSAttributedString.Key.font: customFont
             ]
         }
+        
     }
     
-    func getCafeList(){
-        
-        let urlStr = "https://cafenomad.tw/api/v1.2/cafes".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        let url = URL(string: urlStr!)
-        let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
-            
-            if let error = error {
-                assertionFailure("Error fetching JSON data: \(error)")
-            }
-            
-            if let data = data,
-               let resultArray = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [[String: Any]] {
-                DispatchQueue.main.async {
-                    for coffeeshop in resultArray{
-                        if let cafe = Cafe(json: coffeeshop){
-                            CafeManager.cafeList.append(cafe)
-                        }
-                    }
-                    //CafeManager.cafeList = CafeManager.cafeList.sorted() { $0.latitude > $1.latitude }
-                    
-                    //CafeManager.cafeList = CafeManager.cafeList.reorder(by: <#T##[Cafe.OrderElement]#>)
-                    self.tableView.reloadData()
-                    self.prepareNotification()
-                }
-            }
-        }
-        task.resume()
-    }
-    
-    func createCalendarNotification() {
-        // Notify user to use app every Thursday 20:00
-        
-        // Choose a cafe randomly
-        let randomNum = Int.random(in: 0..<CafeManager.cafeList.count)
-        let suggestedCafe = CafeManager.cafeList[randomNum]
-        
-        // Create user notification
-        let content = UNMutableNotificationContent()
-        content.title = "週末快到了！要不要去咖啡廳？"
-        content.body = "找間咖啡廳放鬆一下，慰勞自己一週的辛勞吧！"
-        content.sound = UNNotificationSound.default
-        
-        // Configure the recurring date.
-        var dateComponents = DateComponents()
-        dateComponents.calendar = Calendar.current
+    func setTableViewBackground() {
+        // Light grey background & footer view
+        self.tableView.backgroundView?.backgroundColor = myColor.lightGrey
+        self.tableView.backgroundColor = myColor.lightGrey
+        self.tableView.separatorStyle = .none
 
-        print("timezone: \(Calendar.current.timeZone)") // Asia/Taipei
-        print("first weekday: \(Calendar.current.firstWeekday)") // Monday
+        // Set Top Padding = 10
+        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         
-        dateComponents.weekday = 5  // Thursday
-        dateComponents.hour = 20    // 20:00
-//        dateComponents.weekday = 6  // for test
-//        dateComponents.hour = 9    // for test
-//        dateComponents.minute = 45 // for test
-           
-        // Create the trigger as a repeating event.
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
-        let request = UNNotificationRequest(identifier: "calendar", content: content, trigger: trigger)
+        let footerView = UIView()
+        footerView.backgroundColor = myColor.lightGrey
+        self.tableView.tableFooterView = footerView
+    }
+    
+    @IBAction func didTapMenuBtn(_ sender: UIBarButtonItem) {
         
-        // Schedule notification
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Error adding request to UNUserNotificationCenter: \(error)")
+        if let tabVC = self.tabBarController as? CafeTabBarController {
+            present(tabVC.sideMenu, animated: true, completion: nil)
+        }
+    }
+    
+    func filterCafes() {
+        
+        cafeArray = CafeManager.cafeList.filter {
+            
+            $0.tasty >= 4.0 &&
+                $0.seat >= 4.0 &&
+                $0.limited_time == "no"
+            
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "gatherDetail" {
+            if let cafeDetailVC = segue.destination as? CafeDetailVC,
+               let row = tableView.indexPathForSelectedRow?.row {
+                cafeDetailVC.currentCafe = (searchController.isActive) ? searchResults[row] :  cafeArray[row]
             }
         }
-        print("Successfully added Calendar notification.")
-    }
-
-    
-    func prepareNotification() {
-        if CafeManager.cafeList.count <= 0 {
-            return
-        }
-        createCalendarNotification()
     }
     
-    // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        if CafeManager.cafeList.count > 0 {
-            tableView.backgroundView?.isHidden = true
-        } else {
-            tableView.backgroundView?.isHidden = false
-            tableView.separatorStyle = .none
-        }
-        
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         if searchController.isActive {
             return searchResults.count
         } else {
-            return CafeManager.cafeList.count
+            return cafeArray.count
         }
     }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if searchController.isActive {
-            return false
-        } else {
-            return true
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CafeListCell.self), for: indexPath) as! CafeListCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "gatherCell", for: indexPath) as! CafeListCell
         
         // 判斷是從搜尋結果或原本陣列取得咖啡廳
-        let cafe = (searchController.isActive) ? searchResults[indexPath.row] : CafeManager.cafeList[indexPath.row]
+        let cafe = (searchController.isActive) ? searchResults[indexPath.row] : cafeArray[indexPath.row]
         
-        // Configure name and location labels
         cell.nameLabel.text = cafe.name
         cell.locationLabel.text = cafe.address
         
@@ -890,44 +812,19 @@ class CafeListVC: UITableViewController {
             cell.mrtLabel.backgroundColor = nil
         }
         
+        
         return cell
     }
     
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if let cafeDetailVC = segue.destination as? CafeDetailVC,
-           let row = tableView.indexPathForSelectedRow?.row {
-            cafeDetailVC.currentCafe = (searchController.isActive) ? searchResults[row] :  CafeManager.cafeList[row]
-        }
-    }
-}
-
-extension Array where Element: Reorderable {
-
-    func reorder(by preferredOrder: [Element.OrderElement]) -> [Element] {
-        sorted {
-            guard let first = preferredOrder.firstIndex(of: $0.orderElement) else {
-                return false
-            }
-
-            guard let second = preferredOrder.firstIndex(of: $1.orderElement) else {
-                return true
-            }
-
-            return first < second
-        }
-    }
 }
 
 // MARK: - UISearchController methods
 
-extension CafeListVC: UISearchResultsUpdating {
+extension GatherVC: UISearchResultsUpdating {
     
     func filterContent(for searchText: String) {
         if searchController.isActive {
-            searchResults = CafeManager.cafeList.filter { (cafe) -> Bool in
+            searchResults = cafeArray.filter { (cafe) -> Bool in
                 let name = cafe.name
                 let address = cafe.address
                 let mrt = cafe.mrt
@@ -944,72 +841,5 @@ extension CafeListVC: UISearchResultsUpdating {
             filterContent(for: searchText)
             tableView.reloadData()
         }
-    }
-}
-
-//extension CafeListVC: UISearchBarDelegate {
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        if searchBar.text?.count == 0 {
-//
-//            tableView.reloadData()
-//            searchBar.resignFirstResponder()
-//            
-//        }
-//    }
-//}
-
-public struct HardCodedOrdering<Element> where Element: Hashable {
-    public enum UnspecifiedItemSortingPolicy {
-        case first
-        case last
-        case assertAllItemsHaveDefinedSorting
-    }
-
-    private let ordering: [Element: Int]
-    private let sortingPolicy: UnspecifiedItemSortingPolicy
-
-    public init(
-        ordering: Element...,
-        sortUnspecifiedItems sortingPolicy: UnspecifiedItemSortingPolicy = .assertAllItemsHaveDefinedSorting
-    ) {
-        self.init(ordering: ordering, sortUnspecifiedItems: sortingPolicy)
-    }
-
-    public init<S: Sequence>(
-        ordering: S,
-        sortUnspecifiedItems sortingPolicy: UnspecifiedItemSortingPolicy = .assertAllItemsHaveDefinedSorting
-    ) where S.Element == Element {
-
-        self.ordering = Dictionary(uniqueKeysWithValues: zip(ordering, 1...))
-        self.sortingPolicy = sortingPolicy
-    }
-
-    private func sortKey(for element: Element) -> Int {
-        if let definedSortKey = self.ordering[element] { return definedSortKey }
-
-        switch sortingPolicy {
-            case .first:    return Int.min
-            case .last:     return Int.max
-
-            case .assertAllItemsHaveDefinedSorting:
-                fatalError("Found an element that does not have a defined ordering: \(element)")
-        }
-    }
-
-    public func contains(_ element: Element) -> Bool {
-        return self.ordering.keys.contains(element)
-    }
-
-    // For use in sorting a collection of `T`s by the value's yielded by `keyDeriver`.
-    // A throwing varient could be introduced, if necessary.
-    public func areInIncreasingOrder<T>(by keyDeriver: @escaping (T) -> Element) -> (T, T) -> Bool {
-        return { lhs, rhs in
-            self.sortKey(for: keyDeriver(lhs)) < self.sortKey(for: keyDeriver(rhs))
-        }
-    }
-
-    // For use in sorting a collection of `Element`s
-    public func areInIncreasingOrder(_ lhs: Element, rhs: Element) -> Bool {
-        return sortKey(for: lhs) < sortKey(for: rhs)
     }
 }
